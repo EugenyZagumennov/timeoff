@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -12,19 +13,20 @@ import java.util.List;
  *
  * @author Evgeniy Zagumennov
  */
-@Repository("daoImpl")
+@Repository("userDao")
 public class UserDao implements IDao<User> {
 
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
 
     @Override
+    @Transactional
     public void save(User entity) {
-        em.persist(entity);
+        entityManager.persist(entity);
     }
 
     @Override
     public List<User> getAll() {
-        return em.createQuery("from user", User.class).getResultList();
+        return entityManager.createQuery("from users", User.class).getResultList();
     }
 }

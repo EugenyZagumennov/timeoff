@@ -9,6 +9,7 @@
 
     <context:annotation-config/>
     <context:component-scan base-package="ez.timeoffcore"/>
+    <tx:annotation-driven />
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
@@ -20,7 +21,6 @@
     <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
 
     <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-        <!--property name="database" value="timeoff"/-->
         <property name="databasePlatform" value="org.hibernate.dialect.MySQL8Dialect"/>
     </bean>
 
