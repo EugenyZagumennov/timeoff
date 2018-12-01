@@ -2,12 +2,8 @@ package ez.timeoffcore.entities;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
-import sun.security.provider.MD5;
 
 import javax.persistence.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
