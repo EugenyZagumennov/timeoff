@@ -33,17 +33,21 @@ public class User {
     @Column(name = "name", length = 200, nullable = false)
     private String name;
 
-    @Column(name = "regdate", nullable = false)
+    @Column(name = "regDate", nullable = false)
     private Date regDate;
 
     @Column(name = "password", nullable = false)
     private byte[] password;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departments_uuid", nullable = false)
+    private Department department;
 
-    public User(String login, String name, Date regDate, byte[] password) {
+    public User(String login, String name, Date regDate, byte[] password, Department department) {
         this.login = login;
         this.name = name;
         this.regDate = regDate;
         this.password = password;
+        this.department = department;
     }
 }
