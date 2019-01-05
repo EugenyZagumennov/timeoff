@@ -32,8 +32,6 @@ public class DepartmentDao implements IDao<Department> {
     @Override
     public List<Department> getAll() {
         log.info("Select all departments");
-        return entityManager.createQuery(
-                    "from departments ds join ds.uuid", Department.class)
-               .getResultList();
+        return entityManager.createQuery("from departments", Department.class).getResultList();
     }
 }

@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,7 +16,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @EqualsAndHashCode
 @Entity(name = "users")
 @Table(name = "users", schema = "timeoff")
@@ -39,7 +39,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private byte[] password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "departments_uuid", nullable = false)
     private Department department;
 
@@ -49,5 +49,17 @@ public class User {
         this.regDate = regDate;
         this.password = password;
         this.department = department;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uuid=" + uuid +
+                ", login='" + login + '\'' +
+                ", name='" + name + '\'' +
+                ", regDate=" + regDate +
+                ", password=" + Arrays.toString(password) +
+                ", department=" + department.getName() +
+                '}';
     }
 }

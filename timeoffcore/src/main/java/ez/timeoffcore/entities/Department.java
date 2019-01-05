@@ -17,7 +17,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @EqualsAndHashCode
 @Entity(name = "departments")
 @Table(name = "departments", schema = "timeoff")
@@ -35,11 +34,21 @@ public class Department {
     @Column(name = "createDate", nullable = false)
     private Date createDate;
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     List<User> users = new ArrayList<>();
 
     public Department(String name, Date createDate) {
         this.name = name;
         this.createDate = createDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "uuid=" + uuid +
+                ", name='" + name + '\'' +
+                ", createDate=" + createDate +
+                ", users.size=" + users.size() +
+                '}';
     }
 }
