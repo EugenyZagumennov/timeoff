@@ -34,7 +34,7 @@ public class Department {
     @Column(name = "createDate", nullable = false)
     private Date createDate;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     List<User> users = new ArrayList<>();
 
     public Department(String name, Date createDate) {
@@ -48,7 +48,6 @@ public class Department {
                 "uuid=" + uuid +
                 ", name='" + name + '\'' +
                 ", createDate=" + createDate +
-                ", users.size=" + users.size() +
                 '}';
     }
 }

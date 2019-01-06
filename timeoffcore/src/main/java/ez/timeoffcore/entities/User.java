@@ -4,9 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Entity class for table 'User'
@@ -42,6 +40,9 @@ public class User {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "departments_uuid", nullable = false)
     private Department department;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Timerecord> timerecords = new ArrayList<>();
 
     public User(String login, String name, Date regDate, byte[] password, Department department) {
         this.login = login;
