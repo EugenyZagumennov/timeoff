@@ -11,10 +11,18 @@ import java.util.*;
  *
  * @author Evgeniy Zagumennov
  */
+
 @Getter
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
+@NamedEntityGraph(
+        name = "User.timerecords",
+        attributeNodes = {
+                @NamedAttributeNode(value = "timerecords", subgraph = "timerecords"),
+        }
+        //, subgraphs = @NamedSubgraph(name = "timerecords", attributeNodes = @NamedAttributeNode("product"))
+)
 @Entity(name = "users")
 @Table(name = "users", schema = "timeoff")
 public class User {
@@ -55,12 +63,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "uuid=" + uuid +
-                ", login='" + login + '\'' +
+                "login='" + login + '\'' +
                 ", name='" + name + '\'' +
-                ", regDate=" + regDate +
-                ", password=" + Arrays.toString(password) +
-                ", department=" + department.getName() +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package ez.timeoffcore.dao;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * DAO interface
@@ -9,6 +10,10 @@ import java.util.List;
  * @param <T> entity type
  */
 public interface IDao<T> {
-    void save(T entity);
+    UUID save(T entity);
     List<T> getAll();
+
+    default List<T> getAllWithTimerecords(){
+        return null;
+    }
 }

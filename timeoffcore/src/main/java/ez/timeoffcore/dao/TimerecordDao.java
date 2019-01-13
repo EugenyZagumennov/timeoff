@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Repository("timerecordDao")
@@ -18,9 +19,10 @@ public class TimerecordDao implements IDao<Timerecord> {
 
     @Override
     @Transactional
-    public void save(Timerecord entity) {
+    public UUID save(Timerecord entity) {
         log.info("Timerecord entity will be persisted", entity);
         entityManager.persist(entity);
+        return entity.getUuid();
     }
 
     @Override

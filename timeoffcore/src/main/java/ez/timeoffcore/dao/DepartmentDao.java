@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Department Data Access Object
@@ -24,14 +25,15 @@ public class DepartmentDao implements IDao<Department> {
 
     @Override
     @Transactional
-    public void save(Department entity) {
+    public UUID save(Department entity) {
         log.info("Department entity will be persisted", entity);
         entityManager.persist(entity);
+        return entity.getUuid();
     }
 
     @Override
     public List<Department> getAll() {
         log.info("Select all departments");
-        return entityManager.createQuery("from departments", Department.class).getResultList();
+        return entityManager.createQuery("select d from departments d left join fetch d.users").getResultList();
     }
 }

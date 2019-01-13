@@ -45,9 +45,7 @@ public class Department {
     @Override
     public String toString() {
         return "Department{" +
-                "uuid=" + uuid +
-                ", name='" + name + '\'' +
-                ", createDate=" + createDate +
+                "name='" + name + '\'' +
                 '}';
     }
 }

@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Repository("taskDao")
@@ -18,9 +19,10 @@ public class TaskDao implements IDao<Task> {
 
     @Override
     @Transactional
-    public void save(Task entity) {
+    public UUID save(Task entity) {
         log.info("Task entity will be persisted", entity);
         entityManager.persist(entity);
+        return entity.getUuid();
     }
 
     @Override

@@ -44,8 +44,7 @@ public class Task {
     @Override
     public String toString() {
         return "Task{" +
-                "uuid=" + uuid +
-                ", stringId='" + stringId + '\'' +
+                "stringId='" + stringId + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }
