@@ -45,7 +45,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private byte[] password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "departments_uuid", nullable = false)
     private Department department;
 

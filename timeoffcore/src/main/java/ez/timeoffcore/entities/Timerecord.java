@@ -15,7 +15,6 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-@ToString
 @Entity(name = "timerecords")
 @Table(name = "timerecords", schema = "timeoff")
 public class Timerecord {
@@ -29,14 +28,14 @@ public class Timerecord {
     @Column(name = "timestamp", nullable = false)
     private long timestamp;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_uuid", nullable = false)
     private User user;
 
     @Column(name = "hours", nullable = false)
     private double hours;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tasks_uuid", nullable = false)
     private Task task;
 
@@ -47,5 +46,12 @@ public class Timerecord {
         this.task = task;
     }
 
-
+    @Override
+    public String toString() {
+        return "Timerecord{" +
+                "uuid=" + uuid +
+                ", timestamp=" + timestamp +
+                ", hours=" + hours +
+                '}';
+    }
 }
