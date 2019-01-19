@@ -1,6 +1,6 @@
 package ez.timeoffcore;
 
-import ez.timeoffcore.dao.IDao;
+import ez.timeoffcore.dao.*;
 import ez.timeoffcore.entities.Department;
 import ez.timeoffcore.entities.Task;
 import ez.timeoffcore.entities.Timerecord;
@@ -10,28 +10,24 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 import java.util.*;
-
-import static com.sun.deploy.config.JREInfo.getAll;
 
 public class Main {
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
         ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring.xml");
-        IDao userDao = (IDao) context.getBean("userDao");
-        IDao departmentDao = (IDao) context.getBean("departmentDao");
-        IDao taskDao = (IDao) context.getBean("taskDao");
-        IDao timerecordDao = (IDao) context.getBean("timerecordDao");
+        UserDao userDao = (UserDao) context.getBean("userDao");
+        DepartmentDao departmentDao = (DepartmentDao) context.getBean("departmentDao");
+        TaskDao taskDao = (TaskDao) context.getBean("taskDao");
+        TimerecordDao timerecordDao = (TimerecordDao) context.getBean("timerecordDao");
 
         List<Department> deps = departmentDao.getAll();
         System.out.println(deps);
         System.out.println("//---------------------------");
         //---------------------------
         Department newDep = new Department("WebDepartment", new Date());
-        departmentDao.save(newDep);
-        deps = departmentDao.getAll();
-        System.out.println(deps);
+        UUID uuid = departmentDao.save(newDep);
+        System.out.println(uuid);
         System.out.println("//---------------------------");
         //----------------------------
         List<User> users = userDao.getAll();
@@ -62,9 +58,13 @@ public class Main {
         System.out.println(trs);
         System.out.println("//---------------------------");
         //---------------------------
+        newDep = (Department) departmentDao.getAll().get(0);
         System.out.println(task.getStringId()+": "+task.getTimerecords());
-        System.out.println(newUser+": "+newUser.getDepartment());
-        System.out.println(newUser+": "+newUser.getTimerecords());
-        System.out.println(newDep+": "+newDep.getUsers());
+        System.out.println(newUser.getName()+": "+newUser.getDepartment());
+        System.out.println(newUser.getName()+": "+newUser.getTimerecords());
+        System.out.println(newDep.getName()+": "+newDep.getUsers());
+
+        List<User> usersWithTimerecords = userDao.getAllWithTimerecords();
+        System.out.println(usersWithTimerecords);
     }
 }

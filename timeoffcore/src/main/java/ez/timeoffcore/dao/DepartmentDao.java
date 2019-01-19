@@ -18,12 +18,11 @@ import java.util.UUID;
  */
 @Slf4j
 @Repository("departmentDao")
-public class DepartmentDao implements IDao<Department> {
+public class DepartmentDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
     @Transactional
     public UUID save(Department entity) {
         log.info("Department entity will be persisted", entity);
@@ -31,7 +30,6 @@ public class DepartmentDao implements IDao<Department> {
         return entity.getUuid();
     }
 
-    @Override
     public List<Department> getAll() {
         log.info("Select all departments");
         return entityManager.createQuery("select d from departments d left join fetch d.users").getResultList();

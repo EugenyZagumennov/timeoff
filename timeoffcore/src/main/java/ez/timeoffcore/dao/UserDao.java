@@ -18,12 +18,11 @@ import java.util.UUID;
  */
 @Slf4j
 @Repository("userDao")
-public class UserDao implements IDao<User> {
+public class UserDao  {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
     @Transactional
     public UUID save(User entity) {
         log.info("User entity will be persisted", entity);
@@ -31,7 +30,6 @@ public class UserDao implements IDao<User> {
         return entity.getUuid();
     }
 
-    @Override
     public List<User> getAll() {
         log.info("Select all users");
         return entityManager.createQuery("from users", User.class).getResultList();

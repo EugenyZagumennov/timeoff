@@ -12,20 +12,18 @@ import java.util.UUID;
 
 @Slf4j
 @Repository("taskDao")
-public class TaskDao implements IDao<Task> {
+public class TaskDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
-    @Transactional
+     @Transactional
     public UUID save(Task entity) {
         log.info("Task entity will be persisted", entity);
         entityManager.persist(entity);
         return entity.getUuid();
     }
 
-    @Override
     public List<Task> getAll() {
         log.info("Select all tasks");
         return entityManager.createQuery("from tasks", Task.class).getResultList();

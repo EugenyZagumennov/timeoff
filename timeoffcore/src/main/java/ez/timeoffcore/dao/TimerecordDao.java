@@ -12,12 +12,11 @@ import java.util.UUID;
 
 @Slf4j
 @Repository("timerecordDao")
-public class TimerecordDao implements IDao<Timerecord> {
+public class TimerecordDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Override
     @Transactional
     public UUID save(Timerecord entity) {
         log.info("Timerecord entity will be persisted", entity);
@@ -25,7 +24,6 @@ public class TimerecordDao implements IDao<Timerecord> {
         return entity.getUuid();
     }
 
-    @Override
     public List<Timerecord> getAll() {
         log.info("Select all timerecords");
         return entityManager.createQuery("from timerecords", Timerecord.class).getResultList();
