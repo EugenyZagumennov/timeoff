@@ -52,13 +52,13 @@ public class Main {
         Timerecord tr = new Timerecord((new Date()).getTime(), newUser, 4, task);
         taskDao.save(task);
         timerecordDao.save(tr);
-        List<Task> tasks = taskDao.getAll();
+        List<Task> tasks = taskDao.getAllWithTimerecords();
         System.out.println(tasks);
         List<Timerecord> trs = timerecordDao.getAll();
         System.out.println(trs);
         System.out.println("//---------------------------");
         //---------------------------
-        newDep = (Department) departmentDao.getAll().get(0);
+        newDep = departmentDao.getAll().get(0);
         System.out.println(task.getStringId()+": "+task.getTimerecords());
         System.out.println(newUser.getName()+": "+newUser.getDepartment());
         System.out.println(newUser.getName()+": "+newUser.getTimerecords());

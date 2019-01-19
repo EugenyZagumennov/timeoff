@@ -17,6 +17,12 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
+@NamedEntityGraph(
+        name = "Task.timerecords",
+        attributeNodes = {
+                @NamedAttributeNode(value = "timerecords", subgraph = "timerecords"),
+        }
+)
 @Entity(name = "tasks")
 @Table(name = "tasks", schema = "timeoff")
 public class Task {

@@ -4,6 +4,7 @@ import ez.timeoffcore.entities.Task;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -27,5 +28,13 @@ public class TaskDao {
     public List<Task> getAll() {
         log.info("Select all tasks");
         return entityManager.createQuery("from tasks", Task.class).getResultList();
+    }
+
+    public List<Task> getAllWithTimerecords(){
+         EntityGraph graph = entityManager.createEntityGraph("Task.timerecords");
+
+        return entityManager.createQuery("from tasks", Task.class)
+                .setHint("javax.persistence.fetchgraph", graph)
+                .getResultList();
     }
 }
