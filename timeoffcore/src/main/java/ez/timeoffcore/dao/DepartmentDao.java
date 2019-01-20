@@ -1,12 +1,14 @@
 package ez.timeoffcore.dao;
 
 import ez.timeoffcore.entities.Department;
-import ez.timeoffcore.entities.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
@@ -32,6 +34,8 @@ public class DepartmentDao {
 
     public List<Department> getAll() {
         log.info("Select all departments");
-        return entityManager.createQuery("select d from departments d left join fetch d.users").getResultList();
+        CriteriaQuery<Department> criteria = entityManager.getCriteriaBuilder().createQuery(Department.class);
+        criteria.from(Department.class);
+        return entityManager.createQuery(criteria).getResultList();
     }
 }
