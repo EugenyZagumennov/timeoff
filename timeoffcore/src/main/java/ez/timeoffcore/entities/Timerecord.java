@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
@@ -25,13 +26,16 @@ public class Timerecord {
     @Column(columnDefinition = "BINARY(16)", length = 16 )
     private UUID uuid;
 
+    @NotNull
     @Column(name = "timestamp", nullable = false)
     private long timestamp;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_uuid", nullable = false)
     private User user;
 
+    @NotNull
     @Column(name = "hours", nullable = false)
     private double hours;
 

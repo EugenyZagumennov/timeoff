@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,9 +30,12 @@ public class Department {
     @Column(columnDefinition = "BINARY(16)", length = 16 )
     private UUID uuid;
 
+    @NotNull
+    @Size(max = 200)
     @Column(name = "name", length = 200, nullable = false)
     private String name;
 
+    @NotNull
     @Column(name = "createDate", nullable = false)
     private Date createDate;
 

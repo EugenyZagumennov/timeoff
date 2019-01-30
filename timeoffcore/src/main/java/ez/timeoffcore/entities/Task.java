@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -33,10 +34,12 @@ public class Task {
     @Column(columnDefinition = "BINARY(16)", length = 16 )
     private UUID uuid;
 
-    @Column(name = "string_id")
+    @NotNull
+    @Column(name = "string_id", nullable = false)
     private String stringId;
 
-    @Column(name = "description")
+    @NotNull
+    @Column(name = "description", nullable = false)
     private String description;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)

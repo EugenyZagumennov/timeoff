@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 /**
@@ -33,15 +35,21 @@ public class User {
     @Column(columnDefinition = "BINARY(16)", length = 16 )
     private UUID uuid;
 
+    @NotNull
+    @Size(max = 100)
     @Column(name = "login", length = 100, nullable = false)
     private String login;
 
+    @NotNull
+    @Size(max = 200)
     @Column(name = "name", length = 200, nullable = false)
     private String name;
 
+    @NotNull
     @Column(name = "regDate", nullable = false)
     private Date regDate;
 
+    @NotNull
     @Column(name = "password", nullable = false)
     private byte[] password;
 
