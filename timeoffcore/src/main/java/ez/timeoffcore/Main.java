@@ -58,11 +58,10 @@ public class Main {
         System.out.println(trs);
         System.out.println("//---------------------------");
         //---------------------------
-        newDep = departmentDao.getAll().get(0);
+        task = tasks.get(0);
         System.out.println(task.getStringId()+": "+task.getTimerecords());
         System.out.println(newUser.getName()+": "+newUser.getDepartment());
-        System.out.println(newUser.getName()+": "+newUser.getTimerecords());
-        System.out.println(newDep.getName()+": "+newDep.getUsers());
+        System.out.println(newUser.getName()+": "+task.getTimerecords());
 
         List<User> usersWithTimerecords = userDao.getAllWithTimerecords();
         System.out.println(usersWithTimerecords);
