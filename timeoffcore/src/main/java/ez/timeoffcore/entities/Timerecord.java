@@ -31,7 +31,7 @@ public class Timerecord {
     private long timestamp;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "users_uuid", nullable = false)
     private User user;
 
@@ -39,7 +39,7 @@ public class Timerecord {
     @Column(name = "hours", nullable = false)
     private double hours;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "tasks_uuid", nullable = false)
     private Task task;
 
@@ -56,6 +56,8 @@ public class Timerecord {
                 "uuid=" + uuid +
                 ", timestamp=" + timestamp +
                 ", hours=" + hours +
+                ", task=" + task +
+                ", user=" + user +
                 '}';
     }
 }

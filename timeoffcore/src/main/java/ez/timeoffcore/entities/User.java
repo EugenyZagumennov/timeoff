@@ -53,7 +53,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private byte[] password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "departments_uuid", nullable = false)
     private Department department;
 
@@ -73,6 +73,7 @@ public class User {
         return "User{" +
                 "login='" + login + '\'' +
                 ", name='" + name + '\'' +
+                ", department='" + department + '\'' +
                 '}';
     }
 }
