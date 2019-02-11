@@ -16,8 +16,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-@Entity(name = "timerecords")
-@Table(name = "timerecords", schema = "timeoff")
+@Entity
+@Table(schema = "timeoff")
 public class Timerecord {
 
     @Id

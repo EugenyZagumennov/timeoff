@@ -24,8 +24,8 @@ import java.util.UUID;
                 @NamedAttributeNode(value = "timerecords", subgraph = "timerecords"),
         }
 )
-@Entity(name = "tasks")
-@Table(name = "tasks", schema = "timeoff")
+@Entity
+@Table(schema = "timeoff")
 public class Task {
 
     @Id

@@ -27,13 +27,13 @@ public class TaskDao {
 
     public List<Task> getAll() {
         log.info("Select all tasks");
-        return entityManager.createQuery("from tasks", Task.class).getResultList();
+        return entityManager.createQuery("from Task", Task.class).getResultList();
     }
 
     public List<Task> getAllWithTimerecords(){
          EntityGraph graph = entityManager.createEntityGraph("Task.timerecords");
 
-        return entityManager.createQuery("from tasks", Task.class)
+        return entityManager.createQuery("from Task", Task.class)
                 .setHint("javax.persistence.fetchgraph", graph)
                 .getResultList();
     }

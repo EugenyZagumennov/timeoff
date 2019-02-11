@@ -20,8 +20,8 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
-@Entity(name = "departments")
-@Table(name = "departments", schema = "timeoff")
+@Entity
+@Table(schema = "timeoff")
 public class Department {
 
     @Id

@@ -32,14 +32,14 @@ public class UserDao  {
 
     public List<User> getAll() {
         log.info("Select all users");
-        return entityManager.createQuery("from users", User.class).getResultList();
+        return entityManager.createQuery("from User", User.class).getResultList();
     }
 
     public List<User> getAllWithTimerecords(){
         EntityGraph graph = entityManager.createEntityGraph("User.timerecords");
         graph.addAttributeNodes("timerecords");
 
-        return entityManager.createQuery("from users", User.class)
+        return entityManager.createQuery("from User", User.class)
                 .setHint("javax.persistence.fetchgraph", graph)
                 .getResultList();
     }

@@ -25,8 +25,8 @@ import java.util.*;
         }
         //, subgraphs = @NamedSubgraph(name = "timerecords", attributeNodes = @NamedAttributeNode("product"))
 )
-@Entity(name = "users")
-@Table(name = "users", schema = "timeoff")
+@Entity
+@Table(schema = "timeoff")
 public class User {
 
     @Id

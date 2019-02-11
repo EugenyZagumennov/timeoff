@@ -26,6 +26,6 @@ public class TimerecordDao {
 
     public List<Timerecord> getAll() {
         log.info("Select all timerecords");
-        return entityManager.createQuery("from timerecords", Timerecord.class).getResultList();
+        return entityManager.createQuery("from Timerecord", Timerecord.class).getResultList();
     }
 }
