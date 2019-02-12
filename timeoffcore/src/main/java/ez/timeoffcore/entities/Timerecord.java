@@ -32,7 +32,7 @@ public class Timerecord {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "user_uuid", nullable = false)
+    @JoinColumn(name = "user_fk", nullable = false)
     private User user;
 
     @NotNull
@@ -40,7 +40,7 @@ public class Timerecord {
     private double hours;
 
     @ManyToOne
-    @JoinColumn(name = "task_uuid", nullable = false)
+    @JoinColumn(name = "task_fk", nullable = false)
     private Task task;
 
     public Timerecord(long timestamp, User user, double hours, Task task) {
