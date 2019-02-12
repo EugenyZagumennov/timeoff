@@ -54,7 +54,7 @@ public class User {
     private byte[] password;
 
     @ManyToOne
-    @JoinColumn(name = "departments_uuid", nullable = false)
+    @JoinColumn(name = "department_uuid", nullable = false)
     private Department department;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
