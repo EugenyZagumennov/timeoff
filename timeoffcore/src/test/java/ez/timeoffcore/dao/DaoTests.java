@@ -22,7 +22,7 @@ import java.util.UUID;
 import static junit.framework.TestCase.*;
 import static org.junit.Assert.assertArrayEquals;
 
-@ContextConfiguration(locations = "classpath:META-INF/spring.xml")
+@ContextConfiguration(locations = "classpath:META-INF/spring-test.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class DaoTests {
 
