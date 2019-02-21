@@ -6,10 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,17 +22,31 @@ public class DepartmentDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
-    public UUID save(Department entity) {
-        log.info("Department entity will be persisted", entity);
-        entityManager.persist(entity);
-        return entity.getUuid();
+    public UUID save(Department user) {
+        log.info("Create new department = " + user);
+        entityManager.persist(user);
+        log.info("New department id = ", user.getUuid());
+        return user.getUuid();
     }
 
-    public List<Department> getAll() {
-        log.info("Select all departments");
+    public Department find(UUID uuid){
+        log.info("Find department with ID = " + uuid);
+        return entityManager.find(Department.class, uuid);
+    }
+
+    public List<Department> findAll() {
+        log.info("Find all departments");
         CriteriaQuery<Department> criteria = entityManager.getCriteriaBuilder().createQuery(Department.class);
         criteria.from(Department.class);
         return entityManager.createQuery(criteria).getResultList();
+    }
+
+    public Department merge(Department department){
+        return entityManager.merge(department);
+    }
+
+    public void remove(Department department){
+        log.info("Remove department = " + department);
+        entityManager.remove(entityManager.contains(department) ? department : entityManager.merge(department));
     }
 }

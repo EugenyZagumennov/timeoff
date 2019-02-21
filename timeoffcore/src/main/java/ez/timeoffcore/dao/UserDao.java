@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
@@ -18,21 +19,38 @@ import java.util.UUID;
  */
 @Slf4j
 @Repository("userDao")
+@Transactional
 public class UserDao  {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
-    public UUID save(User entity) {
-        log.info("User entity will be persisted", entity);
-        entityManager.persist(entity);
-        return entity.getUuid();
+    public UUID save(User user) {
+        log.info("Create new user = " + user);
+        entityManager.persist(user);
+        log.info("New user id = ", user.getUuid());
+        return user.getUuid();
     }
 
-    public List<User> getAll() {
-        log.info("Select all users");
-        return entityManager.createQuery("from User", User.class).getResultList();
+    public User find(UUID uuid){
+        log.info("Find user with ID = " + uuid);
+        return entityManager.find(User.class, uuid);
+    }
+
+    public List<User> findAll() {
+        log.info("Find all users");
+        CriteriaQuery<User> criteria = entityManager.getCriteriaBuilder().createQuery(User.class);
+        criteria.from(User.class);
+        return entityManager.createQuery(criteria).getResultList();
+    }
+
+    public User merge(User user){
+        return entityManager.merge(user);
+    }
+
+    public void remove(User user){
+        log.info("Remove user = " + user);
+        entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
     }
 
     public List<User> getAllWithTimerecords(){
