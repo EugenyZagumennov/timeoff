@@ -23,26 +23,23 @@ public class DepartmentService {
     @Autowired
     private DepartmentDao departmentDao;
 
-    @Autowired
-    private UserDao userDao;
-
-    public UUID createNewDepartment(Department department){
+    public UUID createNew(Department department){
         return departmentDao.save(department);
     }
 
-    public Department getDepartment(UUID uuid){
+    public Department get(UUID uuid){
         return departmentDao.find(uuid);
     }
 
-    public List<Department> getAllDepartments(){
+    public List<Department> getAll(){
         return departmentDao.findAll();
     }
 
-    public Department updateDepartment(Department department){
+    public Department merge(Department department){
         return departmentDao.merge(department);
     }
 
-    public void removeDepartment(Department department){
+    public void remove(Department department){
         departmentDao.remove(department);
     }
 }

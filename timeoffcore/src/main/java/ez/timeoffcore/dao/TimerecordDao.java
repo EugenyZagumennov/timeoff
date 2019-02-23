@@ -6,10 +6,15 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Timerecord Data Access Object
+ *
+ * @author Evgeniy Zagumennov
+ */
 @Slf4j
 @Repository("timerecordDao")
 public class TimerecordDao {
@@ -17,15 +22,30 @@ public class TimerecordDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Transactional
-    public UUID save(Timerecord entity) {
-        log.info("Timerecord entity will be persisted", entity);
-        entityManager.persist(entity);
-        return entity.getUuid();
+    public UUID save(Timerecord tr) {
+        log.info("Create new timerecord = " + tr);
+        entityManager.persist(tr);
+        return tr.getUuid();
     }
 
-    public List<Timerecord> getAll() {
-        log.info("Select all timerecords");
-        return entityManager.createQuery("from Timerecord", Timerecord.class).getResultList();
+    public Timerecord find(UUID uuid){
+        log.info("Find timerecord with ID = " + uuid);
+        return entityManager.find(Timerecord.class, uuid);
+    }
+
+    public List<Timerecord> findAll() {
+        log.info("Find all timerecords");
+        CriteriaQuery<Timerecord> criteria = entityManager.getCriteriaBuilder().createQuery(Timerecord.class);
+        criteria.from(Timerecord.class);
+        return entityManager.createQuery(criteria).getResultList();
+    }
+
+    public Timerecord merge(Timerecord tr){
+        return entityManager.merge(tr);
+    }
+
+    public void remove(Timerecord tr){
+        log.info("Remove timerecord = " + tr);
+        entityManager.remove(entityManager.contains(tr) ? tr : entityManager.merge(tr));
     }
 }

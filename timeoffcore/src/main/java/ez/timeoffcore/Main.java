@@ -2,8 +2,12 @@ package ez.timeoffcore;
 
 import ez.timeoffcore.dao.*;
 import ez.timeoffcore.entities.Department;
+import ez.timeoffcore.entities.Timerecord;
 import ez.timeoffcore.entities.User;
 import ez.timeoffcore.service.DepartmentService;
+import ez.timeoffcore.service.TaskService;
+import ez.timeoffcore.service.TimerecordService;
+import ez.timeoffcore.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -15,25 +19,24 @@ public class Main {
 
     public static void main(String[] args) throws NoSuchAlgorithmException {
         ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring.xml");
-        UserDao userDao = (UserDao) context.getBean("userDao");
-        //DepartmentDao departmentDao = (DepartmentDao) context.getBean("departmentDao");
-        //TaskDao taskDao = (TaskDao) context.getBean("taskDao");
-        //TimerecordDao timerecordDao = (TimerecordDao) context.getBean("timerecordDao");
         DepartmentService departmentService = (DepartmentService) context.getBean("departmentService");
+        UserService userService = (UserService) context.getBean("userService");
+        TaskService taskService = (TaskService) context.getBean("taskService");
+        TimerecordService timerecordService = (TimerecordService) context.getBean("timerecordService");
 
-        List<Department> deps = departmentService.getAllDepartments();
+        List<Department> deps = departmentService.getAll();
         System.out.println(deps);
         System.out.println("//---------------------------");
         //---------------------------
         Department newDep = new Department("WebDepartment", new Date());
-        UUID uuid = departmentService.createNewDepartment(newDep);
+        UUID uuid = departmentService.createNew(newDep);
         System.out.println(uuid);
         System.out.println("//---------------------------");
-        newDep = departmentService.getDepartment(uuid);
+        newDep = departmentService.get(uuid);
         System.out.println(deps);
         System.out.println("//---------------------------");
         //----------------------------
-        List<User> users = userDao.findAll();
+        List<User> users = userService.getAll();
         System.out.println(users);
         System.out.println("//---------------------------");
         //----------------------------
@@ -45,13 +48,13 @@ public class Main {
                 MessageDigest.getInstance("MD5").digest("qwerty".getBytes()),
                 newDep);
 
-        userDao.save(newUser1);
-        userDao.save(newUser2);
-        users = userDao.findAll();
-        departmentService.removeDepartment(newDep);
-        deps = departmentService.getAllDepartments();
-        users = userDao.findAll();
-        deps = departmentService.getAllDepartments();
+        userService.createNew(newUser1);
+        userService.createNew(newUser2);
+        users = userService.getAll();
+        departmentService.remove(newDep);
+        deps = departmentService.getAll();
+        users = userService.getAll();
+        deps = departmentService.getAll();
         System.out.println();
        /* System.out.println(users);
         System.out.println("//---------------------------");
@@ -65,7 +68,7 @@ public class Main {
         Timerecord tr = new Timerecord((new Date()).getTime(), newUser, 4, task);
         taskDao.save(task);
         timerecordDao.save(tr);
-        List<Task> tasks = taskDao.getAllWithTimerecords();
+        List<Task> tasks = taskDao.findAllWithTimerecords();
         System.out.println(tasks);
         List<Timerecord> trs = timerecordDao.findAll();
         System.out.println(trs);
@@ -76,7 +79,7 @@ public class Main {
         System.out.println(newUser.getName()+": "+newUser.getDepartment());
         System.out.println(newUser.getName()+": "+task.getTimerecords());
 
-        List<User> usersWithTimerecords = userDao.getAllWithTimerecords();
+        List<User> usersWithTimerecords = userDao.findAllWithTimerecords();
         System.out.println(usersWithTimerecords);*/
     }
 }

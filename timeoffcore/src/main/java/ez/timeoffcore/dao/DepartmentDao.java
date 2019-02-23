@@ -25,7 +25,6 @@ public class DepartmentDao {
     public UUID save(Department user) {
         log.info("Create new department = " + user);
         entityManager.persist(user);
-        log.info("New department id = ", user.getUuid());
         return user.getUuid();
     }
 

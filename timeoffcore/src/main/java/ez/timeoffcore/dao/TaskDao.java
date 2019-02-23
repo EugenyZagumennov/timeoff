@@ -7,10 +7,16 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityGraph;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Task Data Access Object
+ *
+ * @author Evgeniy Zagumennov
+ */
 @Slf4j
 @Repository("taskDao")
 public class TaskDao {
@@ -18,19 +24,34 @@ public class TaskDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-     @Transactional
-    public UUID save(Task entity) {
-        log.info("Task entity will be persisted", entity);
-        entityManager.persist(entity);
-        return entity.getUuid();
+    public UUID save(Task task) {
+        log.info("Create new task = " + task);
+        entityManager.persist(task);
+        return task.getUuid();
     }
 
-    public List<Task> getAll() {
-        log.info("Select all tasks");
-        return entityManager.createQuery("from Task", Task.class).getResultList();
+    public Task find(UUID uuid){
+        log.info("Find task with ID = " + uuid);
+        return entityManager.find(Task.class, uuid);
     }
 
-    public List<Task> getAllWithTimerecords(){
+    public List<Task> findAll() {
+        log.info("Find all tasks");
+        CriteriaQuery<Task> criteria = entityManager.getCriteriaBuilder().createQuery(Task.class);
+        criteria.from(Task.class);
+        return entityManager.createQuery(criteria).getResultList();
+    }
+
+    public Task merge(Task task){
+        return entityManager.merge(task);
+    }
+
+    public void remove(Task task){
+        log.info("Remove task = " + task);
+        entityManager.remove(entityManager.contains(task) ? task : entityManager.merge(task));
+    }
+
+    public List<Task> findAllWithTimerecords(){
          EntityGraph graph = entityManager.createEntityGraph("Task.timerecords");
 
         return entityManager.createQuery("from Task", Task.class)

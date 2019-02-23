@@ -19,7 +19,6 @@ import java.util.UUID;
  */
 @Slf4j
 @Repository("userDao")
-@Transactional
 public class UserDao  {
 
     @PersistenceContext
@@ -28,7 +27,6 @@ public class UserDao  {
     public UUID save(User user) {
         log.info("Create new user = " + user);
         entityManager.persist(user);
-        log.info("New user id = ", user.getUuid());
         return user.getUuid();
     }
 
@@ -53,7 +51,7 @@ public class UserDao  {
         entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
     }
 
-    public List<User> getAllWithTimerecords(){
+    public List<User> findAllWithTimerecords(){
         EntityGraph graph = entityManager.createEntityGraph("User.timerecords");
         graph.addAttributeNodes("timerecords");
 
