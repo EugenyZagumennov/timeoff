@@ -48,7 +48,11 @@ public class UserDao  {
 
     public void remove(User user){
         log.info("Remove user = " + user);
-        entityManager.remove(entityManager.contains(user) ? user : entityManager.merge(user));
+        if (!entityManager.contains(user)){
+            user = entityManager.merge(user);
+        }
+        user.getDepartment().getUsers().remove(user);
+        entityManager.remove(user);
     }
 
     public List<User> findAllWithTimerecords(){

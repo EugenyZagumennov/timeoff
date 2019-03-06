@@ -24,15 +24,30 @@ public class DepartmentServiceTest {
 
     @Test
     public void CRUD_Test() {
+        //No departments yet
         List<Department> deps = departmentService.getAll();
         assertEquals(0, deps.size());
 
+        //Create new 'TestDepartment'
         Department newDepartment = new Department("TestDepartment", new Date());
         UUID departmentUuid = departmentService.createNew(newDepartment);
         assertNotNull(departmentUuid);
 
+        //Fetch TesrtDepartment from DB
         Department foundDepartment = departmentService.get(departmentUuid);
+        assertEquals("TestDepartment", foundDepartment.getName());
 
+        //Rename TestDepartment and save to DB
+        foundDepartment.setName("AnotherDepartment");
+        departmentService.merge(foundDepartment);
 
+        //Fetch AnotherDepartment from DB
+        Department anotherDepartment = departmentService.get(departmentUuid);
+        assertEquals("AnotherDepartment", foundDepartment.getName());
+
+        //Remove AnotherDepartment from DB
+        departmentService.remove(anotherDepartment);
+        deps = departmentService.getAll();
+        assertEquals(0, deps.size());
     }
 }

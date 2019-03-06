@@ -21,8 +21,8 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public UUID createNew(User department){
-        return userDao.save(department);
+    public UUID createNew(User user){
+        return userDao.save(user);
     }
 
     public User get(UUID uuid){
@@ -33,12 +33,12 @@ public class UserService {
         return userDao.findAll();
     }
 
-    public User merge(User department){
-        return userDao.merge(department);
+    public User merge(User user){
+        return userDao.merge(user);
     }
 
-    public void remove(User department){
-        userDao.remove(department);
+    public void remove(User user){
+        userDao.remove(user);
     }
 
     public List<User> getAllWithTimerecords(){
