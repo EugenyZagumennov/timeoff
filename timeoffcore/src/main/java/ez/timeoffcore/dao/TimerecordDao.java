@@ -46,6 +46,11 @@ public class TimerecordDao {
 
     public void remove(Timerecord tr){
         log.info("Remove timerecord = " + tr);
-        entityManager.remove(entityManager.contains(tr) ? tr : entityManager.merge(tr));
+        if(!entityManager.contains(tr)){
+            tr = entityManager.merge(tr);
+        }
+        tr.getUser().getTimerecords().remove(tr);
+        tr.getTask().getTimerecords().remove(tr);
+        entityManager.remove(tr);
     }
 }

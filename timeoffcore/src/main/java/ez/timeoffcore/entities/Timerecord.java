@@ -30,7 +30,6 @@ public class Timerecord {
     @Column(name = "timestamp", nullable = false)
     private long timestamp;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_fk", nullable = false)
     private User user;
