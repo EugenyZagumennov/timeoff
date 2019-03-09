@@ -21,7 +21,7 @@ public class TaskService {
     @Autowired
     private TaskDao taskDao;
 
-    public UUID createNew(Task task){
+    public UUID save(Task task){
         return taskDao.save(task);
     }
 

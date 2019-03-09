@@ -21,7 +21,7 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
-    public UUID createNew(User user){
+    public UUID save(User user){
         return userDao.save(user);
     }
 

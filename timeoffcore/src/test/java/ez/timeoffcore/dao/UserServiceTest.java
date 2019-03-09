@@ -34,7 +34,7 @@ public class UserServiceTest {
     @Before
     public void setUp() throws Exception {
         department = new Department("TestDepartment", new Date());
-        departmentService.createNew(department);
+        departmentService.save(department);
         assertNotNull(department.getUuid());
     }
 
@@ -53,7 +53,7 @@ public class UserServiceTest {
 
         //Create test user
         User user = new User("login", "User Name", new Date(), "password".getBytes(), department);
-        UUID userUuid = userService.createNew(user);
+        UUID userUuid = userService.save(user);
         assertNotNull(userUuid);
 
         //Fetch test user from DB

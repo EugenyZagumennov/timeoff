@@ -21,7 +21,7 @@ public class TimerecordService {
     @Autowired
     private TimerecordDao timerecordDao;
 
-    public UUID createNew(Timerecord timerecord){
+    public UUID save(Timerecord timerecord){
         return timerecordDao.save(timerecord);
     }
 

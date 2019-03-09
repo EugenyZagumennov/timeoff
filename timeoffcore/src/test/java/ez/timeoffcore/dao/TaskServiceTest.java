@@ -29,7 +29,7 @@ public class TaskServiceTest {
 
         //Create test task
         Task task = new Task("TestID", "Test task");
-        UUID taskUuid = taskService.createNew(task);
+        UUID taskUuid = taskService.save(task);
         assertNotNull(taskUuid);
 
         //Fetch test task by UUID

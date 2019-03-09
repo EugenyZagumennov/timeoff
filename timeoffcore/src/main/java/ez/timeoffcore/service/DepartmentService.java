@@ -23,7 +23,7 @@ public class DepartmentService {
     @Autowired
     private DepartmentDao departmentDao;
 
-    public UUID createNew(Department department){
+    public UUID save(Department department){
         return departmentDao.save(department);
     }
 

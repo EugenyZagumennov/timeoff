@@ -46,15 +46,15 @@ public class TimerecordServiceTest {
     @Before
     public void setUp() throws Exception {
         department = new Department("TestDepartment", new Date());
-        UUID depUuid = departmentService.createNew(department);
+        UUID depUuid = departmentService.save(department);
         assertNotNull(depUuid);
 
         user = new User("login", "Name", new Date(), "qwerty".getBytes(), department);
-        UUID userUuid = userService.createNew(user);
+        UUID userUuid = userService.save(user);
         assertNotNull(userUuid);
 
         task = new Task("TestID", "Test task");
-        UUID taskUuid = taskService.createNew(task);
+        UUID taskUuid = taskService.save(task);
         assertNotNull(taskUuid);
     }
 
@@ -74,7 +74,7 @@ public class TimerecordServiceTest {
         assertEquals(0, trs.size());
 
         Timerecord tr = new Timerecord(999L, user, 8, task);
-        UUID trUuid = timerecordService.createNew(tr);
+        UUID trUuid = timerecordService.save(tr);
 
         Timerecord foundTr = timerecordService.get(trUuid);
         assertEquals(999, tr.getTimestamp());

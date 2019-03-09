@@ -4,7 +4,6 @@ import ez.timeoffcore.entities.Department;
 import ez.timeoffcore.entities.User;
 import ez.timeoffcore.service.DepartmentService;
 import ez.timeoffcore.service.UserService;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class DepartmentServiceTest {
 
         //Create new 'TestDepartment'
         Department newDepartment = new Department("TestDepartment", new Date());
-        UUID departmentUuid = departmentService.createNew(newDepartment);
+        UUID departmentUuid = departmentService.save(newDepartment);
         assertNotNull(departmentUuid);
 
         //Fetch TesrtDepartment from DB
@@ -53,7 +52,7 @@ public class DepartmentServiceTest {
 
         //Fetch departments with users
         User user = new User("login", "Name", new Date(), "qwerty".getBytes(), anotherDepartment);
-        UUID userUuid = userService.createNew(user);
+        UUID userUuid = userService.save(user);
         assertNotNull(userUuid);
 
         deps = departmentService.getAllWithUsers();

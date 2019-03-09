@@ -1,8 +1,6 @@
 package ez.timeoffcore;
 
-import ez.timeoffcore.dao.*;
 import ez.timeoffcore.entities.Department;
-import ez.timeoffcore.entities.Timerecord;
 import ez.timeoffcore.entities.User;
 import ez.timeoffcore.service.DepartmentService;
 import ez.timeoffcore.service.TaskService;
@@ -29,7 +27,7 @@ public class Main {
         System.out.println("//---------------------------");
         //---------------------------
         Department newDep = new Department("WebDepartment", new Date());
-        UUID uuid = departmentService.createNew(newDep);
+        UUID uuid = departmentService.save(newDep);
         System.out.println(uuid);
         System.out.println("//---------------------------");
         newDep = departmentService.get(uuid);
@@ -48,8 +46,8 @@ public class Main {
                 MessageDigest.getInstance("MD5").digest("qwerty".getBytes()),
                 newDep);
 
-        userService.createNew(newUser1);
-        userService.createNew(newUser2);
+        userService.save(newUser1);
+        userService.save(newUser2);
         users = userService.getAll();
         departmentService.remove(newDep);
         deps = departmentService.getAll();
