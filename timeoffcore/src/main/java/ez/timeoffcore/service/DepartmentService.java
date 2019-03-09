@@ -35,6 +35,10 @@ public class DepartmentService {
         return departmentDao.findAll();
     }
 
+    public List<Department> getAllWithUsers(){
+        return departmentDao.findAllWithUsers();
+    }
+
     public Department merge(Department department){
         return departmentDao.merge(department);
     }

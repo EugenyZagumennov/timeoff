@@ -1,7 +1,10 @@
 package ez.timeoffcore.dao;
 
 import ez.timeoffcore.entities.Department;
+import ez.timeoffcore.entities.User;
 import ez.timeoffcore.service.DepartmentService;
+import ez.timeoffcore.service.UserService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,9 @@ public class DepartmentServiceTest {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private UserService userService;
 
     @Test
     public void CRUD_Test() {
@@ -44,6 +50,19 @@ public class DepartmentServiceTest {
         //Fetch AnotherDepartment from DB
         Department anotherDepartment = departmentService.get(departmentUuid);
         assertEquals("AnotherDepartment", foundDepartment.getName());
+
+        //Fetch departments with users
+        User user = new User("login", "Name", new Date(), "qwerty".getBytes(), anotherDepartment);
+        UUID userUuid = userService.createNew(user);
+        assertNotNull(userUuid);
+
+        deps = departmentService.getAllWithUsers();
+        assertNotNull(deps);
+        assertNotNull(deps.get(0));
+        assertEquals(1, deps.get(0).getUsers().size());
+
+        userService.remove(user);
+        assertEquals(0, userService.getAll().size());
 
         //Remove AnotherDepartment from DB
         departmentService.remove(anotherDepartment);

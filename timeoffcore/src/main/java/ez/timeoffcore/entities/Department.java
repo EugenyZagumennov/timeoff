@@ -21,6 +21,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
+@NamedQueries(
+        @NamedQuery(
+                name = "Department.findAllWithUsers",
+                query = "select d from Department d JOIN FETCH d.users u"
+        )
+)
 @Table(schema = "timeoff")
 public class Department {
 

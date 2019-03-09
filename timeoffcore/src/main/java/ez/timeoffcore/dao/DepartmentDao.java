@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.UUID;
@@ -38,6 +39,12 @@ public class DepartmentDao {
         CriteriaQuery<Department> criteria = entityManager.getCriteriaBuilder().createQuery(Department.class);
         criteria.from(Department.class);
         return entityManager.createQuery(criteria).getResultList();
+    }
+
+    public List<Department> findAllWithUsers(){
+        log.info("Find all departments");
+        TypedQuery<Department> typedQuery = entityManager.createNamedQuery("Department.findAllWithUsers", Department.class);
+        return typedQuery.getResultList();
     }
 
     public Department merge(Department department){
