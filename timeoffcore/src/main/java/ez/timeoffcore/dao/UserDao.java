@@ -55,9 +55,9 @@ public class UserDao  {
         entityManager.remove(user);
     }
 
-    public List<User> findAllWithTimerecords(){
-        EntityGraph graph = entityManager.createEntityGraph("User.timerecords");
-        graph.addAttributeNodes("timerecords");
+    public List<User> findAllWithTasks(){
+        EntityGraph graph = entityManager.createEntityGraph("User.tasks");
+        graph.addAttributeNodes("tasks");
 
         return entityManager.createQuery("from User", User.class)
                 .setHint("javax.persistence.fetchgraph", graph)

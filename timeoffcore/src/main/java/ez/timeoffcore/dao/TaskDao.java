@@ -1,6 +1,7 @@
 package ez.timeoffcore.dao;
 
 import ez.timeoffcore.entities.Task;
+import ez.timeoffcore.entities.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
@@ -48,7 +49,14 @@ public class TaskDao {
 
     public void remove(Task task){
         log.info("Remove task = " + task);
-        entityManager.remove(entityManager.contains(task) ? task : entityManager.merge(task));
+        if(!entityManager.contains(task)){
+            task = entityManager.merge(task);
+        }
+        User user = task.getUser();
+        if(user != null && user.getTasks() != null) {
+            user.getTasks().remove(task);
+        }
+        entityManager.remove(task);
     }
 
     public List<Task> findAllWithTimerecords(){

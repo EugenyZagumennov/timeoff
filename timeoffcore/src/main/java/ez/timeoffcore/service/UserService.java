@@ -41,7 +41,7 @@ public class UserService {
         userDao.remove(user);
     }
 
-    public List<User> getAllWithTimerecords(){
-        return userDao.findAllWithTimerecords();
+    public List<User> getAllWithTasks(){
+        return userDao.findAllWithTasks();
     }
 }

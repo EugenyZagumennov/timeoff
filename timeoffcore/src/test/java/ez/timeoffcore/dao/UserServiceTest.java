@@ -1,9 +1,12 @@
 package ez.timeoffcore.dao;
 
 import ez.timeoffcore.entities.Department;
+import ez.timeoffcore.entities.Task;
 import ez.timeoffcore.entities.User;
+import ez.timeoffcore.entities.enums.TaskStatus;
 import ez.timeoffcore.entities.enums.UserRole;
 import ez.timeoffcore.service.DepartmentService;
+import ez.timeoffcore.service.TaskService;
 import ez.timeoffcore.service.UserService;
 import org.junit.After;
 import org.junit.Before;
@@ -29,6 +32,9 @@ public class UserServiceTest {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private TaskService taskService;
 
     private Department department;
 
@@ -74,6 +80,41 @@ public class UserServiceTest {
 
         //Remove user from DB
         userService.remove(anotherUser);
+        users = userService.getAll();
+        assertEquals(0, users.size());
+    }
+
+    @Test
+    public void testUserWithTasks(){
+        //No users yet
+        List<User> users = userService.getAll();
+        assertEquals(0, users.size());
+
+        //Create test user
+        User user = new User("login", "User Name", new Date(), "password".getBytes(), department, UserRole.USER);
+        UUID userUuid = userService.save(user);
+        assertNotNull(userUuid);
+
+        //Create test task
+        assertEquals(0, taskService.getAll().size());
+        Task newTask = new Task("T1", "Test task", TaskStatus.OPEN);
+        UUID taskUuid = taskService.save(newTask);
+        assertNotNull(taskUuid);
+        assertEquals(1, taskService.getAll().size());
+
+        newTask.setUser(user);
+        taskService.merge(newTask);
+
+        newTask = taskService.get(taskUuid);
+        assertNotNull(newTask.getUser());
+        users = userService.getAllWithTasks();
+        assertEquals(1, users.get(0).getTasks().size());
+
+        taskService.remove(newTask);
+        assertEquals(0, taskService.getAll().size());
+
+        //Remove user from DB
+        userService.remove(user);
         users = userService.getAll();
         assertEquals(0, users.size());
     }

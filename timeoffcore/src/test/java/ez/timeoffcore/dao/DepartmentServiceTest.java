@@ -63,10 +63,5 @@ public class DepartmentServiceTest {
 
         userService.remove(user);
         assertEquals(0, userService.getAll().size());
-
-        //Remove AnotherDepartment from DB
-        departmentService.remove(anotherDepartment);
-        deps = departmentService.getAll();
-        assertEquals(0, deps.size());
     }
 }
