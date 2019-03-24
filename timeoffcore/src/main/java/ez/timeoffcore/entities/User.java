@@ -21,9 +21,9 @@ import java.util.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @NamedEntityGraph(
-        name = "User.timerecords",
+        name = "User.tasks",
         attributeNodes = {
-                @NamedAttributeNode(value = "timerecords", subgraph = "timerecords"),
+                @NamedAttributeNode(value = "tasks", subgraph = "tasks"),
         }
         //, subgraphs = @NamedSubgraph(name = "timerecords", attributeNodes = @NamedAttributeNode("product"))
 )
@@ -70,7 +70,7 @@ public class User {
     private UserStatus status = UserStatus.CREATED;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Timerecord> timerecords = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     public User(String login, String name, Date regDate, byte[] password, Department department, UserRole role) {
         this.login = login;
