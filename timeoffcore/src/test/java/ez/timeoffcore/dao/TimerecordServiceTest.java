@@ -4,6 +4,8 @@ import ez.timeoffcore.entities.Department;
 import ez.timeoffcore.entities.Task;
 import ez.timeoffcore.entities.Timerecord;
 import ez.timeoffcore.entities.User;
+import ez.timeoffcore.entities.enums.TaskStatus;
+import ez.timeoffcore.entities.enums.UserRole;
 import ez.timeoffcore.service.DepartmentService;
 import ez.timeoffcore.service.TaskService;
 import ez.timeoffcore.service.TimerecordService;
@@ -49,11 +51,11 @@ public class TimerecordServiceTest {
         UUID depUuid = departmentService.save(department);
         assertNotNull(depUuid);
 
-        user = new User("login", "Name", new Date(), "qwerty".getBytes(), department);
+        user = new User("login", "Name", new Date(), "qwerty".getBytes(), department, UserRole.USER);
         UUID userUuid = userService.save(user);
         assertNotNull(userUuid);
 
-        task = new Task("TestID", "Test task");
+        task = new Task("TestID", "Test task", TaskStatus.OPEN);
         UUID taskUuid = taskService.save(task);
         assertNotNull(taskUuid);
     }

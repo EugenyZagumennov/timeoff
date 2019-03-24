@@ -2,6 +2,7 @@ package ez.timeoffcore.dao;
 
 import ez.timeoffcore.entities.Department;
 import ez.timeoffcore.entities.User;
+import ez.timeoffcore.entities.enums.UserRole;
 import ez.timeoffcore.service.DepartmentService;
 import ez.timeoffcore.service.UserService;
 import org.junit.After;
@@ -52,7 +53,7 @@ public class UserServiceTest {
         assertEquals(0, users.size());
 
         //Create test user
-        User user = new User("login", "User Name", new Date(), "password".getBytes(), department);
+        User user = new User("login", "User Name", new Date(), "password".getBytes(), department, UserRole.USER);
         UUID userUuid = userService.save(user);
         assertNotNull(userUuid);
 

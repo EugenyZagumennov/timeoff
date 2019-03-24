@@ -1,6 +1,7 @@
 package ez.timeoffcore.dao;
 
 import ez.timeoffcore.entities.Task;
+import ez.timeoffcore.entities.enums.TaskStatus;
 import ez.timeoffcore.service.TaskService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ public class TaskServiceTest {
         assertEquals(0, tasks.size());
 
         //Create test task
-        Task task = new Task("TestID", "Test task");
+        Task task = new Task("TestID", "Test task", TaskStatus.OPEN);
         UUID taskUuid = taskService.save(task);
         assertNotNull(taskUuid);
 

@@ -1,5 +1,6 @@
 package ez.timeoffcore.entities;
 
+import ez.timeoffcore.entities.enums.TaskStatus;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static javax.persistence.EnumType.STRING;
 
 /**
 * Entity class for table 'Tasks'
@@ -42,12 +45,18 @@ public class Task {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @NotNull
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     List<Timerecord> timerecords = new ArrayList<>();
 
-    public Task(String stringId, String description) {
+    public Task(String stringId, String description, TaskStatus status) {
         this.stringId = stringId;
         this.description = description;
+        this.status = status;
     }
 
     @Override
