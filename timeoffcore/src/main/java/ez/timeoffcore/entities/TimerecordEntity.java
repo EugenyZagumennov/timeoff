@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
- * Entity class for table 'Timerecord'
+ * Entity class for table 'TimerecordEntity'
  *
  * @author Evgeniy Zagumennov
  */
@@ -17,8 +17,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(schema = "timeoff")
-public class Timerecord {
+@Table(schema = "timeoff", name = "timerecord")
+public class TimerecordEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -32,7 +32,7 @@ public class Timerecord {
 
     @ManyToOne
     @JoinColumn(name = "user_fk", nullable = false)
-    private User user;
+    private UserEntity user;
 
     @NotNull
     @Column(name = "hours", nullable = false)
@@ -40,9 +40,9 @@ public class Timerecord {
 
     @ManyToOne
     @JoinColumn(name = "task_fk", nullable = false)
-    private Task task;
+    private TaskEntity task;
 
-    public Timerecord(long timestamp, User user, double hours, Task task) {
+    public TimerecordEntity(long timestamp, UserEntity user, double hours, TaskEntity task) {
         this.timestamp = timestamp;
         this.user = user;
         this.hours = hours;
@@ -51,7 +51,7 @@ public class Timerecord {
 
     @Override
     public String toString() {
-        return "Timerecord{" +
+        return "TimerecordEntity{" +
                 "uuid=" + uuid +
                 ", timestamp=" + timestamp +
                 ", hours=" + hours +

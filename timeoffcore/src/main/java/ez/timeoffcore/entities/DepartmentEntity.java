@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Entity class for table 'Department'
+ * Entity class for table 'DepartmentEntity'
  *
  * @author Evgeniy Zagumennov
  */
@@ -23,12 +23,12 @@ import java.util.UUID;
 @Entity
 @NamedQueries(
         @NamedQuery(
-                name = "Department.findAllWithUsers",
-                query = "select d from Department d JOIN FETCH d.users u"
+                name = "DepartmentEntity.findAllWithUsers",
+                query = "select d from DepartmentEntity d JOIN FETCH d.users u"
         )
 )
-@Table(schema = "timeoff")
-public class Department {
+@Table(schema = "timeoff", name = "department")
+public class DepartmentEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -46,16 +46,16 @@ public class Department {
     private Date createDate;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<User> users = new ArrayList<>();
+    List<UserEntity> users = new ArrayList<>();
 
-    public Department(String name, Date createDate) {
+    public DepartmentEntity(String name, Date createDate) {
         this.name = name;
         this.createDate = createDate;
     }
 
     @Override
     public String toString() {
-        return "Department{" +
+        return "DepartmentEntity{" +
                 "name='" + name + '\'' +
                 '}';
     }

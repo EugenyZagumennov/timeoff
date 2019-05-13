@@ -1,7 +1,7 @@
 package ez.timeoffcore.service;
 
-import ez.timeoffcore.dao.TimerecordDao;
-import ez.timeoffcore.entities.Timerecord;
+import ez.timeoffcore.dao.TimerecordRepository;
+import ez.timeoffcore.entities.TimerecordEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Timerecord service class
+ * TimerecordEntity service class
  *
  * @author Evgeniy Zagumennov
  */
@@ -19,25 +19,21 @@ import java.util.UUID;
 public class TimerecordService {
 
     @Autowired
-    private TimerecordDao timerecordDao;
+    private TimerecordRepository timerecordRepository;
 
-    public UUID save(Timerecord timerecord){
-        return timerecordDao.save(timerecord);
+    public TimerecordEntity save(TimerecordEntity timerecord){
+        return timerecordRepository.save(timerecord);
     }
 
-    public Timerecord get(UUID uuid){
-        return timerecordDao.find(uuid);
+    public TimerecordEntity get(UUID uuid){
+        return timerecordRepository.findById(uuid).orElse(null);
     }
 
-    public List<Timerecord> getAll(){
-        return timerecordDao.findAll();
+    public List<TimerecordEntity> getAll(){
+        return timerecordRepository.findAll();
     }
 
-    public Timerecord merge(Timerecord timerecord){
-        return timerecordDao.merge(timerecord);
-    }
-
-    public void remove(Timerecord timerecord){
-        timerecordDao.remove(timerecord);
+    public void delete(TimerecordEntity timerecord){
+        timerecordRepository.delete(timerecord);
     }
 }

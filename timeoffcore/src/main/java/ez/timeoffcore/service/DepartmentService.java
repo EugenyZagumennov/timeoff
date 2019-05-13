@@ -1,9 +1,7 @@
 package ez.timeoffcore.service;
 
-import ez.timeoffcore.dao.DepartmentDao;
-import ez.timeoffcore.dao.UserDao;
-import ez.timeoffcore.entities.Department;
-import ez.timeoffcore.entities.User;
+import ez.timeoffcore.dao.DepartmentRepository;
+import ez.timeoffcore.entities.DepartmentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Department service class
+ * DepartmentEntity service class
  *
  * @author Evgeniy Zagumennov
  */
@@ -21,29 +19,21 @@ import java.util.UUID;
 public class DepartmentService {
 
     @Autowired
-    private DepartmentDao departmentDao;
+    private DepartmentRepository departmentRepository;
 
-    public UUID save(Department department){
-        return departmentDao.save(department);
+    public DepartmentEntity save(DepartmentEntity department){
+        return departmentRepository.save(department);
     }
 
-    public Department get(UUID uuid){
-        return departmentDao.find(uuid);
+    public DepartmentEntity get(UUID uuid){
+        return departmentRepository.findById(uuid).orElse(null);
     }
 
-    public List<Department> getAll(){
-        return departmentDao.findAll();
+    public List<DepartmentEntity> getAll(){
+        return departmentRepository.findAll();
     }
 
-    public List<Department> getAllWithUsers(){
-        return departmentDao.findAllWithUsers();
-    }
-
-    public Department merge(Department department){
-        return departmentDao.merge(department);
-    }
-
-    public void remove(Department department){
-        departmentDao.remove(department);
+    public void delete(DepartmentEntity department){
+        departmentRepository.delete(department);
     }
 }

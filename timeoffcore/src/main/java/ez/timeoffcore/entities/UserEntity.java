@@ -1,7 +1,7 @@
 package ez.timeoffcore.entities;
 
-import ez.timeoffcore.entities.enums.UserRole;
-import ez.timeoffcore.entities.enums.UserStatus;
+import ez.timeoffcore.entities.enums.UserRoleEntity;
+import ez.timeoffcore.entities.enums.UserStatusEntity;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -11,25 +11,24 @@ import javax.validation.constraints.Size;
 import java.util.*;
 
 /**
- * Entity class for table 'User'
+ * Entity class for table 'UserEntity'
  *
  * @author Evgeniy Zagumennov
  */
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @EqualsAndHashCode
 @NamedEntityGraph(
-        name = "User.tasks",
+        name = "UserEntity.tasks",
         attributeNodes = {
                 @NamedAttributeNode(value = "tasks", subgraph = "tasks"),
         }
         //, subgraphs = @NamedSubgraph(name = "timerecords", attributeNodes = @NamedAttributeNode("product"))
 )
 @Entity
-@Table(schema = "timeoff")
-public class User {
+@Table(schema = "timeoff", name = "user")
+public class UserEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -57,22 +56,22 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "department_fk", nullable = false)
-    private Department department;
+    private DepartmentEntity department;
 
     @NotNull
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private UserRoleEntity role = UserRoleEntity.USER;
 
     @NotNull
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserStatus status = UserStatus.CREATED;
+    private UserStatusEntity status = UserStatusEntity.CREATED;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> tasks = new ArrayList<>();
+    private List<TaskEntity> tasks = new ArrayList<>();
 
-    public User(String login, String name, Date regDate, byte[] password, Department department, UserRole role) {
+    public UserEntity(String login, String name, Date regDate, byte[] password, DepartmentEntity department, UserRoleEntity role) {
         this.login = login;
         this.name = name;
         this.regDate = regDate;
@@ -83,7 +82,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserEntity{" +
                 "login='" + login + '\'' +
                 ", name='" + name + '\'' +
                 ", department='" + department + '\'' +

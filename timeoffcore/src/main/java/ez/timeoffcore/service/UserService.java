@@ -1,7 +1,7 @@
 package ez.timeoffcore.service;
 
-import ez.timeoffcore.dao.UserDao;
-import ez.timeoffcore.entities.User;
+import ez.timeoffcore.dao.UserRepository;
+import ez.timeoffcore.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * User service class
+ * UserEntity service class
  *
  * @author Evgeniy Zagumennov
  */
@@ -19,29 +19,21 @@ import java.util.UUID;
 public class UserService {
 
     @Autowired
-    private UserDao userDao;
+    private UserRepository userRepository;
 
-    public UUID save(User user){
-        return userDao.save(user);
+    public UserEntity save(UserEntity user){
+        return userRepository.save(user);
     }
 
-    public User get(UUID uuid){
-        return userDao.find(uuid);
+    public UserEntity findById(UUID uuid){
+        return userRepository.findById(uuid).orElse(null);
     }
 
-    public List<User> getAll(){
-        return userDao.findAll();
+    public List<UserEntity> getAll(){
+        return userRepository.findAll();
     }
 
-    public User merge(User user){
-        return userDao.merge(user);
-    }
-
-    public void remove(User user){
-        userDao.remove(user);
-    }
-
-    public List<User> getAllWithTasks(){
-        return userDao.findAllWithTasks();
+    public void delete(UserEntity user){
+        userRepository.delete(user);
     }
 }

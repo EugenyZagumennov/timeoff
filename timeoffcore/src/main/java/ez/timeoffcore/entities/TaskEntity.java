@@ -1,6 +1,6 @@
 package ez.timeoffcore.entities;
 
-import ez.timeoffcore.entities.enums.TaskStatus;
+import ez.timeoffcore.entities.enums.TaskStatusEntity;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,8 +9,6 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
-import static javax.persistence.EnumType.STRING;
 
 /**
 * Entity class for table 'Tasks'
@@ -22,14 +20,14 @@ import static javax.persistence.EnumType.STRING;
 @NoArgsConstructor
 @EqualsAndHashCode
 @NamedEntityGraph(
-        name = "Task.timerecords",
+        name = "TaskEntity.timerecords",
         attributeNodes = {
                 @NamedAttributeNode(value = "timerecords", subgraph = "timerecords"),
         }
 )
 @Entity
-@Table(schema = "timeoff")
-public class Task {
+@Table(schema = "timeoff", name = "task")
+public class TaskEntity {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -48,16 +46,16 @@ public class Task {
     @NotNull
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private TaskStatus status;
+    private TaskStatusEntity status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_fk")
-    private User user;
+    private UserEntity user;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<Timerecord> timerecords = new ArrayList<>();
+    List<TimerecordEntity> timerecords = new ArrayList<>();
 
-    public Task(String stringId, String description, TaskStatus status) {
+    public TaskEntity(String stringId, String description, TaskStatusEntity status) {
         this.stringId = stringId;
         this.description = description;
         this.status = status;
@@ -65,7 +63,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "TaskEntity{" +
                 "stringId='" + stringId + '\'' +
                 ", description='" + description + '\'' +
                 '}';
