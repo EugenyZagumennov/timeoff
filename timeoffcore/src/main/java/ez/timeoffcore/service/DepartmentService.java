@@ -25,11 +25,11 @@ public class DepartmentService {
         return departmentRepository.save(department);
     }
 
-    public DepartmentEntity get(UUID uuid){
+    public DepartmentEntity findById(UUID uuid){
         return departmentRepository.findById(uuid).orElse(null);
     }
 
-    public List<DepartmentEntity> getAll(){
+    public List<DepartmentEntity> findAll(){
         return departmentRepository.findAll();
     }
 

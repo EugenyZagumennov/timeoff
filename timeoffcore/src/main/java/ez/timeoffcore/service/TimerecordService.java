@@ -25,11 +25,11 @@ public class TimerecordService {
         return timerecordRepository.save(timerecord);
     }
 
-    public TimerecordEntity get(UUID uuid){
+    public TimerecordEntity findById(UUID uuid){
         return timerecordRepository.findById(uuid).orElse(null);
     }
 
-    public List<TimerecordEntity> getAll(){
+    public List<TimerecordEntity> findAll(){
         return timerecordRepository.findAll();
     }
 

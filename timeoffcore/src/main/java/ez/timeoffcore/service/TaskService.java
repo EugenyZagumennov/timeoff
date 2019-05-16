@@ -25,11 +25,11 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public TaskEntity get(UUID uuid){
+    public TaskEntity findById(UUID uuid){
         return taskRepository.findById(uuid).orElse(null);
     }
 
-    public List<TaskEntity> getAll(){
+    public List<TaskEntity> findAll(){
         return taskRepository.findAll();
     }
 

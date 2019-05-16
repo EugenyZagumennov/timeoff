@@ -29,7 +29,7 @@ public class UserService {
         return userRepository.findById(uuid).orElse(null);
     }
 
-    public List<UserEntity> getAll(){
+    public List<UserEntity> findAll(){
         return userRepository.findAll();
     }
 

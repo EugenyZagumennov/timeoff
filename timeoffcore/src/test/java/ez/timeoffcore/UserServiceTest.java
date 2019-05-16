@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -27,19 +28,18 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    public void CRUD_Test() {
+    public void userCRUDTest() {
         //No users yet
-        List<UserEntity> users = userService.getAll();
+        List<UserEntity> users = userService.findAll();
         assertEquals(0, users.size());
 
         //Create test user
         UserEntity user = new UserEntity("login", "UserEntity Name", new Date(), "password".getBytes(), null, UserRoleEntity.USER);
-        user = userService.save(user);
-        assertNotNull(user);
-        assertNotNull(user.getUuid());
+        UUID uuid = userService.save(user).getUuid();
+        assertNotNull(uuid);
 
         //Fetch test user from DB
-        UserEntity foundUser = userService.findById(user.getUuid());
+        UserEntity foundUser = userService.findById(uuid);
         assertEquals("UserEntity Name", foundUser.getName());
 
         //Rename test user and save to DB
@@ -47,13 +47,13 @@ public class UserServiceTest {
         userService.save(foundUser);
 
         //Fetch renamed user from DB
-        UserEntity anotherUser = userService.findById(foundUser.getUuid());
+        UserEntity anotherUser = userService.findById(uuid);
         assertNotNull(anotherUser);
         assertEquals("Another Name", anotherUser.getName());
 
         //Remove user from DB
         userService.delete(anotherUser);
-        UserEntity deletedUser = userService.findById(anotherUser.getUuid());
+        UserEntity deletedUser = userService.findById(uuid);
         assertNull(deletedUser);
     }
 }
