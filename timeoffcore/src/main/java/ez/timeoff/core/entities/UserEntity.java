@@ -55,7 +55,7 @@ public class UserEntity {
     private byte[] password;
 
     @ManyToOne
-    @JoinColumn(name = "department_fk", nullable = false)
+    @JoinColumn(name = "department_fk"/*, nullable = false*/) //TODO nullable=false
     private DepartmentEntity department;
 
     @NotNull

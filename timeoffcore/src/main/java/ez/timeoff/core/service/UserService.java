@@ -29,6 +29,11 @@ public class UserService {
         return userRepository.findById(uuid).orElse(null);
     }
 
+    public List<UserEntity> findByNameLike(String name){
+        return userRepository.findByNameContaining(name);
+    }
+
+
     public List<UserEntity> findAll(){
         return userRepository.findAll();
     }
