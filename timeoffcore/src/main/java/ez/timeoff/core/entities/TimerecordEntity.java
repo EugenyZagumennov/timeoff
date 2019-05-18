@@ -1,4 +1,4 @@
-package ez.timeoffcore.entities;
+package ez.timeoff.core.entities;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;

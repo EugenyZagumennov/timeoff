@@ -1,7 +1,7 @@
-package ez.timeoffcore.entities;
+package ez.timeoff.core.entities;
 
-import ez.timeoffcore.entities.enums.UserRoleEntity;
-import ez.timeoffcore.entities.enums.UserStatusEntity;
+import ez.timeoff.core.entities.enums.UserRoleEntity;
+import ez.timeoff.core.entities.enums.UserStatusEntity;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 

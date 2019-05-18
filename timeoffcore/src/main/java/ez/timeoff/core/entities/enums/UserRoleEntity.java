@@ -1,4 +1,4 @@
-package ez.timeoffcore.entities.enums;
+package ez.timeoff.core.entities.enums;
 
 import javax.persistence.Table;
 

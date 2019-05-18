@@ -1,8 +1,8 @@
-package ez.timeoffcore;
+package ez.timeoff.core;
 
-import ez.timeoffcore.entities.UserEntity;
-import ez.timeoffcore.entities.enums.UserRoleEntity;
-import ez.timeoffcore.service.UserService;
+import ez.timeoff.core.entities.UserEntity;
+import ez.timeoff.core.entities.enums.UserRoleEntity;
+import ez.timeoff.core.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

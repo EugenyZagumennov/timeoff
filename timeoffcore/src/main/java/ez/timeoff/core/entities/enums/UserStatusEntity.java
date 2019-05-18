@@ -1,6 +1,4 @@
-package ez.timeoffcore.entities.enums;
-
-import lombok.NoArgsConstructor;
+package ez.timeoff.core.entities.enums;
 
 import javax.persistence.Table;
 

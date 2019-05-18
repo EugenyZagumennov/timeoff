@@ -1,8 +1,8 @@
-package ez.timeoffcore;
+package ez.timeoff.core;
 
-import ez.timeoffcore.entities.TaskEntity;
-import ez.timeoffcore.entities.enums.TaskStatusEntity;
-import ez.timeoffcore.service.TaskService;
+import ez.timeoff.core.entities.TaskEntity;
+import ez.timeoff.core.entities.enums.TaskStatusEntity;
+import ez.timeoff.core.service.TaskService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

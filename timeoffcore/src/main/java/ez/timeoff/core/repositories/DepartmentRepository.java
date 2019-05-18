@@ -1,6 +1,6 @@
-package ez.timeoffcore.dao;
+package ez.timeoff.core.repositories;
 
-import ez.timeoffcore.entities.DepartmentEntity;
+import ez.timeoff.core.entities.DepartmentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

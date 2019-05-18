@@ -1,6 +1,6 @@
-package ez.timeoffcore.entities;
+package ez.timeoff.core.entities;
 
-import ez.timeoffcore.entities.enums.TaskStatusEntity;
+import ez.timeoff.core.entities.enums.TaskStatusEntity;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 

@@ -1,7 +1,7 @@
-package ez.timeoffcore;
+package ez.timeoff.core;
 
-import ez.timeoffcore.entities.DepartmentEntity;
-import ez.timeoffcore.service.DepartmentService;
+import ez.timeoff.core.entities.DepartmentEntity;
+import ez.timeoff.core.service.DepartmentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
-package ez.timeoffcore.service;
+package ez.timeoff.core.service;
 
-import ez.timeoffcore.dao.DepartmentRepository;
-import ez.timeoffcore.entities.DepartmentEntity;
+import ez.timeoff.core.repositories.DepartmentRepository;
+import ez.timeoff.core.entities.DepartmentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

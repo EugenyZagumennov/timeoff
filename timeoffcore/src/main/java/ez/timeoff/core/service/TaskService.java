@@ -1,7 +1,7 @@
-package ez.timeoffcore.service;
+package ez.timeoff.core.service;
 
-import ez.timeoffcore.dao.TaskRepository;
-import ez.timeoffcore.entities.TaskEntity;
+import ez.timeoff.core.repositories.TaskRepository;
+import ez.timeoff.core.entities.TaskEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

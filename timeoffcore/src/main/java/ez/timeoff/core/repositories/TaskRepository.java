@@ -1,6 +1,6 @@
-package ez.timeoffcore.dao;
+package ez.timeoff.core.repositories;
 
-import ez.timeoffcore.entities.TimerecordEntity;
+import ez.timeoff.core.entities.TaskEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,4 +12,4 @@ import java.util.UUID;
  * @author Evgeniy Zagumennov
  */
 @Repository
-public interface TimerecordRepository extends JpaRepository<TimerecordEntity, UUID> { }
+public interface TaskRepository extends JpaRepository<TaskEntity, UUID> {}
