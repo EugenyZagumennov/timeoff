@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Departments</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+    <body>
+        <form method="post" action="/departments">
+            <input type="text" name="name" placeholder="Название" /><br>
+            <button type="submit">Добавить</button>
+        </form><br>
+
+        <form method="post" action="/departments/filter">
+            <input type="text" name="name" placeholder="Название" /><br>
+            <button type="submit">Найти</button>
+        </form><br>
+
+        <div>Список департаментов:</div>
+        <table>
+            {{#departments}}
+            <tr>
+                <td>{{name}}</td>
+            </tr>
+            {{/departments}}
+        </table>
+    </body>
+</html>

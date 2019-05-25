@@ -36,4 +36,8 @@ public class DepartmentService {
     public void delete(DepartmentEntity department){
         departmentRepository.delete(department);
     }
+
+    public List<DepartmentEntity> findByNameLike(String name) {
+        return departmentRepository.findByNameContaining(name);
+    }
 }
