@@ -1,7 +1,7 @@
 package ez.timeoff.core.entities;
 
-import ez.timeoff.core.entities.enums.UserRoleEntity;
-import ez.timeoff.core.entities.enums.UserStatusEntity;
+import ez.timeoff.core.entities.enums.UserRole;
+import ez.timeoff.core.entities.enums.UserStatus;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -61,17 +61,17 @@ public class UserEntity {
     @NotNull
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRoleEntity role = UserRoleEntity.USER;
+    private UserRole role = UserRole.USER;
 
     @NotNull
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserStatusEntity status = UserStatusEntity.CREATED;
+    private UserStatus status = UserStatus.CREATED;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TaskEntity> tasks = new ArrayList<>();
 
-    public UserEntity(String login, String name, Date regDate, byte[] password, DepartmentEntity department, UserRoleEntity role) {
+    public UserEntity(String login, String name, Date regDate, byte[] password, DepartmentEntity department, UserRole role) {
         this.login = login;
         this.name = name;
         this.regDate = regDate;

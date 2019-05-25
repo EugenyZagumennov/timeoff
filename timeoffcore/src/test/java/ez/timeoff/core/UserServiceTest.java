@@ -1,7 +1,7 @@
 package ez.timeoff.core;
 
 import ez.timeoff.core.entities.UserEntity;
-import ez.timeoff.core.entities.enums.UserRoleEntity;
+import ez.timeoff.core.entities.enums.UserRole;
 import ez.timeoff.core.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ public class UserServiceTest {
         assertEquals(0, users.size());
 
         //Create test user
-        UserEntity user = new UserEntity("login", "UserEntity Name", new Date(), "password".getBytes(), null, UserRoleEntity.USER);
+        UserEntity user = new UserEntity("login", "UserEntity Name", new Date(), "password".getBytes(), null, UserRole.USER);
         UUID uuid = userService.save(user).getUuid();
         assertNotNull(uuid);
 

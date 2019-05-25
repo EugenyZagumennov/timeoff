@@ -1,6 +1,6 @@
 package ez.timeoff.core.entities;
 
-import ez.timeoff.core.entities.enums.TaskStatusEntity;
+import ez.timeoff.core.entities.enums.TaskStatus;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -46,7 +46,7 @@ public class TaskEntity {
     @NotNull
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private TaskStatusEntity status;
+    private TaskStatus status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_fk")
@@ -55,7 +55,7 @@ public class TaskEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     List<TimerecordEntity> timerecords = new ArrayList<>();
 
-    public TaskEntity(String stringId, String description, TaskStatusEntity status) {
+    public TaskEntity(String stringId, String description, TaskStatus status) {
         this.stringId = stringId;
         this.description = description;
         this.status = status;

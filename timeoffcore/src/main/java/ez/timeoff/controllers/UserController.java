@@ -1,17 +1,15 @@
 package ez.timeoff.controllers;
 
+import ez.timeoff.core.dto.CreateUserDto;
 import ez.timeoff.core.entities.DepartmentEntity;
 import ez.timeoff.core.entities.UserEntity;
-import ez.timeoff.core.entities.enums.UserRoleEntity;
 import ez.timeoff.core.service.DepartmentService;
 import ez.timeoff.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -35,13 +33,8 @@ public class UserController {
     }
 
     @PostMapping
-    public String addUser(@RequestParam String login,
-                          @RequestParam String name,
-                          @RequestParam String password,
-                          @RequestParam String depUuid,
-                          Map<String, Object> model
-    ) {
-        userService.createNewUser(login, name, password, depUuid);
+    public String addUser(@Valid CreateUserDto userDto, Map<String, Object> model) {
+        userService.createNewUser(userDto);
 
         List<UserEntity> users = userService.findAll();
         List<DepartmentEntity> deps = departmentService.findAll();
