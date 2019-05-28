@@ -2,7 +2,6 @@ package ez.timeoff.core.service;
 
 import ez.timeoff.core.dto.CreateUserDto;
 import ez.timeoff.core.dto.mappers.CreateUserDtoMapper;
-import ez.timeoff.core.entities.DepartmentEntity;
 import ez.timeoff.core.repositories.UserRepository;
 import ez.timeoff.core.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,9 @@ public class UserService {
     @Autowired
     private DepartmentService departmentService;
 
+    @Autowired
+    CreateUserDtoMapper mapper;
+
     public UserEntity save(UserEntity user){
         return userRepository.save(user);
     }
@@ -48,10 +50,10 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public void createNewUser(CreateUserDto userDto){
-        DepartmentEntity department = departmentService.findById(UUID.fromString(userDto.getDepUuid()));
-        UserEntity userEntity = CreateUserDtoMapper.INSTANCE.map(userDto);
-        userEntity.setDepartment(department);
+    public UserEntity createNewUser(CreateUserDto userDto){
+        UserEntity userEntity = mapper.map(userDto);
         save(userEntity);
+
+        return userEntity;
     }
 }

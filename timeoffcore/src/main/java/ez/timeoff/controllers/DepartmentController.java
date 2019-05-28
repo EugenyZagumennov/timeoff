@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import javax.validation.constraints.NotNull;
 
 @Controller
 @RequestMapping("/departments")
@@ -28,10 +29,8 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public String addUser(@RequestParam String name, Map<String, Object> model
-    ) {
-        DepartmentEntity dep = new DepartmentEntity(name, new Date());
-        departmentService.save(dep);
+    public String addUser(@NotNull @RequestParam String name, Map<String, Object> model) {
+        departmentService.createNewDepartment(name);
 
         List<DepartmentEntity> deps = departmentService.findAll();
         model.put("departments", deps);

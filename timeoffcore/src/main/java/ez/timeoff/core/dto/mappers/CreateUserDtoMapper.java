@@ -1,18 +1,28 @@
 package ez.timeoff.core.dto.mappers;
 
 import ez.timeoff.core.dto.CreateUserDto;
+import ez.timeoff.core.entities.DepartmentEntity;
 import ez.timeoff.core.entities.UserEntity;
+import ez.timeoff.core.service.DepartmentService;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.UUID;
 
 @Mapper(componentModel = "spring")
-public interface CreateUserDtoMapper {
+public abstract class CreateUserDtoMapper {
 
-    CreateUserDtoMapper INSTANCE = Mappers.getMapper( CreateUserDtoMapper.class );
+    @Autowired
+    private DepartmentService departmentService;
 
     @Mapping(target = "regDate", expression = "java(new java.util.Date())")
     @Mapping(target = "password", source = "password.bytes")
-    @Mapping(target = "department", ignore = true)
-    UserEntity map(CreateUserDto dto);
+    @Mapping(target = "department", expression = "java(getDepartment(dto))")
+    public abstract UserEntity map(CreateUserDto dto);
+
+    protected DepartmentEntity getDepartment(CreateUserDto dto){
+        return departmentService.findById(UUID.fromString(dto.getDepUuid()));
+    }
 }
