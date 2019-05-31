@@ -23,6 +23,6 @@ public abstract class CreateUserDtoMapper {
     public abstract UserEntity map(CreateUserDto dto);
 
     protected DepartmentEntity getDepartment(CreateUserDto dto){
-        return departmentService.findById(UUID.fromString(dto.getDepUuid()));
+        return departmentService.findById(UUID.fromString(dto.getDepartmentUuid()));
     }
 }
