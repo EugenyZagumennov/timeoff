@@ -1,15 +1,11 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
+    <head>
+        <title>Добро пожаловать!</title>
+    </head>
     <body>
-        <form method="post" action="/login">
-            <input type="text"     name="username" placeholder="Логин" /><br>
-            <input type="password" name="password" placeholder="Пароль" /><br>
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-            <button type="submit">Войти</button>
-        </form>
+        <h1>Добро пожаловать!</h1>
+
+        <p>Click <a href="/users">here</a> to see a greeting.</p>
     </body>
 </html>

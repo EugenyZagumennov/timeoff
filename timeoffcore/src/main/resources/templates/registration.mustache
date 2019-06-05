@@ -5,11 +5,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
     <body>
-        <form method="post" action="login">
-            <input type="text"     name="username" placeholder="Логин" /><br>
-            <input type="password" name="password" placeholder="Пароль" /><br>
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-            <button type="submit">Войти</button>
+        {{#message}}
+            {{message}}
+        {{/message}}
+        <form method="post" action="/registration">
+            <input type="text"      name="username" placeholder="Логин" /><br>
+            <input type="text"      name="name"     placeholder="Имя" /><br>
+            <input type="password"  name="password" placeholder="Пароль"><br>
+            <input type="hidden"    name="_csrf"    value="{{_csrf.token}}">
+            <button type="submit">Создать</button>
         </form>
     </body>
 </html>

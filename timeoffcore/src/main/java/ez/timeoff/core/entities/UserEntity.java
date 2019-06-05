@@ -38,8 +38,8 @@ public class UserEntity {
 
     @NotNull
     @Size(max = 100)
-    @Column(name = "login", length = 100, nullable = false)
-    private String login;
+    @Column(name = "username", length = 100, nullable = false)
+    private String username;
 
     @NotNull
     @Size(max = 200)
@@ -55,7 +55,7 @@ public class UserEntity {
     private byte[] password;
 
     @ManyToOne
-    @JoinColumn(name = "department_fk", nullable = false)
+    @JoinColumn(name = "department_fk"/*, nullable = false*/) //TODO
     private DepartmentEntity department;
 
     @NotNull
@@ -71,8 +71,8 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TaskEntity> tasks = new ArrayList<>();
 
-    public UserEntity(String login, String name, Date regDate, byte[] password, DepartmentEntity department, UserRole role) {
-        this.login = login;
+    public UserEntity(String username, String name, Date regDate, byte[] password, DepartmentEntity department, UserRole role) {
+        this.username = username;
         this.name = name;
         this.regDate = regDate;
         this.password = password;
@@ -83,7 +83,7 @@ public class UserEntity {
     @Override
     public String toString() {
         return "UserEntity{" +
-                "login='" + login + '\'' +
+                "username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", department='" + department + '\'' +
                 '}';

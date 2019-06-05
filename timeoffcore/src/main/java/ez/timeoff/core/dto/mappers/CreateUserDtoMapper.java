@@ -19,7 +19,7 @@ public abstract class CreateUserDtoMapper {
 
     @Mapping(target = "regDate", expression = "java(new java.util.Date())")
     @Mapping(target = "password", source = "password.bytes")
-    @Mapping(target = "department", expression = "java(getDepartment(dto))")
+    @Mapping(target = "department", ignore = true/*expression = "java(getDepartment(dto))"*/) //TODO
     public abstract UserEntity map(CreateUserDto dto);
 
     protected DepartmentEntity getDepartment(CreateUserDto dto){

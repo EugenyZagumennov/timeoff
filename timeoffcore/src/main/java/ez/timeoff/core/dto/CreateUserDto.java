@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class CreateUserDto {
     @NotEmpty
-    private String login;
+    private String username;
 
     @NotEmpty
     private String name;
@@ -15,6 +15,6 @@ public class CreateUserDto {
     @NotEmpty
     private String password;
 
-    @NotEmpty
+    //@NotEmpty //TODO
     private String departmentUuid;
 }

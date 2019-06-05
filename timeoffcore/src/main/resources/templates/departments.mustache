@@ -5,13 +5,20 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
     <body>
+        <form action="/logout" method="post">
+            <input type="submit" value="Выйти"/>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        </form><br>
+
         <form method="post" action="/departments">
             <input type="text" name="name" placeholder="Название" /><br>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
             <button type="submit">Добавить</button>
         </form><br>
 
         <form method="post" action="/departments/filter">
             <input type="text" name="name" placeholder="Название" /><br>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
             <button type="submit">Найти</button>
         </form><br>
 

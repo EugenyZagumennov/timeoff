@@ -34,7 +34,7 @@ public class UserServiceTest {
         assertEquals(0, users.size());
 
         //Create test user
-        UserEntity user = new UserEntity("login", "UserEntity Name", new Date(), "password".getBytes(), null, UserRole.USER);
+        UserEntity user = new UserEntity("username", "UserEntity Name", new Date(), "password".getBytes(), null, UserRole.USER);
         UUID uuid = userService.save(user).getUuid();
         assertNotNull(uuid);
 
