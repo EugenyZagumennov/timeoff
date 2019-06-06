@@ -37,12 +37,12 @@ public class UserService {
         return userRepository.findById(uuid).orElse(null);
     }
 
-    public List<UserEntity> findByNameLike(String name){
-        return userRepository.findByNameContaining(name);
+    public List<UserEntity> findByFirstNameLike(String name){
+        return userRepository.findAllByFirstNameContaining(name);
     }
 
-    public List<UserEntity> findByUsername(String username){
-        return userRepository.findByUsername(username);
+    public UserEntity findByLogin(String login){
+        return userRepository.findByLogin(login);
     }
 
 

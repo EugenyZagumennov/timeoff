@@ -17,9 +17,9 @@ public abstract class CreateUserDtoMapper {
     @Autowired
     private DepartmentService departmentService;
 
-    @Mapping(target = "regDate", expression = "java(new java.util.Date())")
+    @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")
     @Mapping(target = "password", source = "password.bytes")
-    @Mapping(target = "department", ignore = true/*expression = "java(getDepartment(dto))"*/) //TODO
+    @Mapping(target = "department", expression = "java(getDepartment(dto))")
     public abstract UserEntity map(CreateUserDto dto);
 
     protected DepartmentEntity getDepartment(CreateUserDto dto){

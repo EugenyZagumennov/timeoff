@@ -8,7 +8,11 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+import java.time.Instant;
 
 /**
  * Entity class for table 'UserEntity'
@@ -38,24 +42,29 @@ public class UserEntity {
 
     @NotNull
     @Size(max = 100)
-    @Column(name = "username", length = 100, nullable = false)
-    private String username;
+    @Column(name = "login", length = 100, nullable = false)
+    private String login;
 
     @NotNull
     @Size(max = 200)
-    @Column(name = "name", length = 200, nullable = false)
-    private String name;
+    @Column(name = "firstName", length = 200, nullable = false)
+    private String firstName;
 
     @NotNull
-    @Column(name = "regDate", nullable = false)
-    private Date regDate;
+    @Size(max = 200)
+    @Column(name = "lastName", length = 200, nullable = false)
+    private String lastName;
+
+    @NotNull
+    @Column(name = "createdDate", nullable = false)
+    private Instant createdDate;
 
     @NotNull
     @Column(name = "password", nullable = false)
     private byte[] password;
 
     @ManyToOne
-    @JoinColumn(name = "department_fk"/*, nullable = false*/) //TODO
+    @JoinColumn(name = "department_fk", nullable = false)
     private DepartmentEntity department;
 
     @NotNull
@@ -71,10 +80,11 @@ public class UserEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TaskEntity> tasks = new ArrayList<>();
 
-    public UserEntity(String username, String name, Date regDate, byte[] password, DepartmentEntity department, UserRole role) {
-        this.username = username;
-        this.name = name;
-        this.regDate = regDate;
+    public UserEntity(String login, String firstName, String lastName, Instant createdDate, byte[] password, DepartmentEntity department, UserRole role) {
+        this.login = login;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.createdDate = createdDate;
         this.password = password;
         this.department = department;
         this.role = role;
@@ -83,8 +93,9 @@ public class UserEntity {
     @Override
     public String toString() {
         return "UserEntity{" +
-                "username='" + username + '\'' +
-                ", name='" + name + '\'' +
+                "login='" + login + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", department='" + department + '\'' +
                 '}';
     }

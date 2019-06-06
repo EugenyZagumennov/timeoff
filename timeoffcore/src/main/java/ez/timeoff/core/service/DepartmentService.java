@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -44,7 +45,7 @@ public class DepartmentService {
     }
 
     public DepartmentEntity createNewDepartment(String name){
-        DepartmentEntity departmentEntiry = new DepartmentEntity(name, new Date());
+        DepartmentEntity departmentEntiry = new DepartmentEntity(name, Instant.now());
         departmentRepository.save(departmentEntiry);
 
         return departmentEntiry;

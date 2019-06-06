@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -34,22 +35,23 @@ public class UserServiceTest {
         assertEquals(0, users.size());
 
         //Create test user
-        UserEntity user = new UserEntity("username", "UserEntity Name", new Date(), "password".getBytes(), null, UserRole.USER);
+        UserEntity user
+                = new UserEntity("login", "FirstName",  "LastName", Instant.now(), "password".getBytes(), null, UserRole.USER);
         UUID uuid = userService.save(user).getUuid();
         assertNotNull(uuid);
 
         //Fetch test user from DB
         UserEntity foundUser = userService.findById(uuid);
-        assertEquals("UserEntity Name", foundUser.getName());
+        assertEquals("FirstName", foundUser.getFirstName());
 
         //Rename test user and save to DB
-        foundUser.setName("Another Name");
+        foundUser.setFirstName("Another Name");
         userService.save(foundUser);
 
         //Fetch renamed user from DB
         UserEntity anotherUser = userService.findById(uuid);
         assertNotNull(anotherUser);
-        assertEquals("Another Name", anotherUser.getName());
+        assertEquals("Another Name", anotherUser.getFirstName());
 
         //Remove user from DB
         userService.delete(anotherUser);

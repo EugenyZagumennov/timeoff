@@ -34,22 +34,28 @@ public class UserController {
 
     @PostMapping
     public String addUser(@Valid CreateUserDto userDto, Map<String, Object> model) {
-        userService.createNewUser(userDto);
-
-        List<UserEntity> users = userService.findAll();
         List<DepartmentEntity> deps = departmentService.findAll();
-        model.put("users", users);
         model.put("departments", deps);
+
+        UserEntity foundUser = userService.findByLogin(userDto.getLogin());
+        if(foundUser != null){
+            model.put("message", "User exists!");
+            return "users";
+        }
+
+        userService.createNewUser(userDto);
+        List<UserEntity> users = userService.findAll();
+        model.put("users", users);
         return "users";
     }
 
     @PostMapping("/filter")
-    public String filter(@RequestParam String name, Map<String, Object> model) {
+    public String filter(@RequestParam String firstname, Map<String, Object> model) {
         List<UserEntity> users;
-        if(name == null || name.isEmpty()){
+        if(firstname == null || firstname.isEmpty()){
             users = userService.findAll();
         }else {
-            users = userService.findByNameLike(name);
+            users = userService.findByFirstNameLike(firstname);
         }
         model.put("users", users);
 

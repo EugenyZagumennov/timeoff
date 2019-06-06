@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +33,7 @@ public class DepartmentServiceTest {
         assertEquals(0, deps.size());
 
         //Create new 'TestDepartment'
-        DepartmentEntity newDepartment = new DepartmentEntity("TestDepartment", new Date());
+        DepartmentEntity newDepartment = new DepartmentEntity("TestDepartment", Instant.now());
         UUID uuid = departmentService.save(newDepartment).getUuid();
         assertNotNull(newDepartment);
 

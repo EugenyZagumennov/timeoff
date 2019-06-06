@@ -8,10 +8,11 @@ import java.util.Map;
 
 @Controller
 @RequestMapping
-public class GreetingController {
+public class LogInController
+{
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model){
-        return "greeting";
+        return "redirect:/login";
     }
 }

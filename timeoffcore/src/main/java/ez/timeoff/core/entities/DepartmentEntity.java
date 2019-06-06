@@ -6,8 +6,9 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,15 +43,15 @@ public class DepartmentEntity {
     private String name;
 
     @NotNull
-    @Column(name = "createDate", nullable = false)
-    private Date createDate;
+    @Column(name = "createdDate", nullable = false)
+    private Instant createdDate;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     List<UserEntity> users = new ArrayList<>();
 
-    public DepartmentEntity(String name, Date createDate) {
+    public DepartmentEntity(String name, Instant createdDate) {
         this.name = name;
-        this.createDate = createDate;
+        this.createdDate = createdDate;
     }
 
     @Override
