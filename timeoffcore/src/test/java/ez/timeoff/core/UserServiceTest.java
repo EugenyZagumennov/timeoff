@@ -15,7 +15,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -37,11 +36,11 @@ public class UserServiceTest {
         //Create test user
         UserEntity user
                 = new UserEntity("login", "FirstName",  "LastName", Instant.now(), "password".getBytes(), null, UserRole.USER);
-        UUID uuid = userService.save(user).getUuid();
-        assertNotNull(uuid);
+        Long id = userService.save(user).getId();
+        assertNotNull(id);
 
         //Fetch test user from DB
-        UserEntity foundUser = userService.findById(uuid);
+        UserEntity foundUser = userService.findById(id);
         assertEquals("FirstName", foundUser.getFirstName());
 
         //Rename test user and save to DB
@@ -49,13 +48,13 @@ public class UserServiceTest {
         userService.save(foundUser);
 
         //Fetch renamed user from DB
-        UserEntity anotherUser = userService.findById(uuid);
+        UserEntity anotherUser = userService.findById(id);
         assertNotNull(anotherUser);
         assertEquals("Another Name", anotherUser.getFirstName());
 
         //Remove user from DB
         userService.delete(anotherUser);
-        UserEntity deletedUser = userService.findById(uuid);
+        UserEntity deletedUser = userService.findById(id);
         assertNull(deletedUser);
     }
 }

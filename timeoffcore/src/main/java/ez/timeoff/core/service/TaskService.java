@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * TaskEntity service class
@@ -25,8 +24,8 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public TaskEntity findById(UUID uuid){
-        return taskRepository.findById(uuid).orElse(null);
+    public TaskEntity findById(Long id){
+        return taskRepository.findById(id).orElse(null);
     }
 
     public List<TaskEntity> findAll(){

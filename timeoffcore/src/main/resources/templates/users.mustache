@@ -18,9 +18,9 @@
             <input type="text" name="lastName" placeholder="Фамилия" /><br>
             <input type="password" name="password" placeholder="Пароль"><br>
             <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-            <select name="departmentUuid">
+            <select name="departmentId">
                 {{#departments}}
-                <option value="{{uuid}}">{{name}}</option>
+                <option value="{{id}}">{{name}}</option>
                 {{/departments}}
             </select><br>
             <button type="submit">Добавить</button>

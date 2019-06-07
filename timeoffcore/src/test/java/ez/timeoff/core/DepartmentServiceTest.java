@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -34,11 +33,11 @@ public class DepartmentServiceTest {
 
         //Create new 'TestDepartment'
         DepartmentEntity newDepartment = new DepartmentEntity("TestDepartment", Instant.now());
-        UUID uuid = departmentService.save(newDepartment).getUuid();
+        Long id = departmentService.save(newDepartment).getId();
         assertNotNull(newDepartment);
 
         //Fetch TestDepartment from DB
-        DepartmentEntity foundDepartment = departmentService.findById(uuid);
+        DepartmentEntity foundDepartment = departmentService.findById(id);
         assertEquals("TestDepartment", foundDepartment.getName());
 
         //Rename TestDepartment and save to DB
@@ -46,12 +45,12 @@ public class DepartmentServiceTest {
         departmentService.save(foundDepartment);
 
         //Fetch AnotherDepartment from DB
-        DepartmentEntity anotherDepartment = departmentService.findById(uuid);
+        DepartmentEntity anotherDepartment = departmentService.findById(id);
         assertEquals("AnotherDepartment", anotherDepartment.getName());
 
         //Remove department from DB
         departmentService.delete(anotherDepartment);
-        DepartmentEntity deletedDepartment = departmentService.findById(uuid);
+        DepartmentEntity deletedDepartment = departmentService.findById(id);
         assertNull(deletedDepartment);
     }
 }

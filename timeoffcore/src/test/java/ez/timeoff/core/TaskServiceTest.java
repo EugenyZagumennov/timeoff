@@ -12,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.Assert.*;
 
@@ -33,11 +32,11 @@ public class TaskServiceTest {
 
         //Create new 'TestTask'
         TaskEntity newTask = new TaskEntity("T1", "Test Task", TaskStatus.OPEN);
-        UUID uuid = taskService.save(newTask).getUuid();
+        Long id = taskService.save(newTask).getId();
         assertNotNull(newTask);
 
         //Fetch TestTask from DB
-        TaskEntity foundTask = taskService.findById(uuid);
+        TaskEntity foundTask = taskService.findById(id);
         assertEquals("Test Task", foundTask.getDescription());
 
         //Rename TestTask and save to DB
@@ -45,12 +44,12 @@ public class TaskServiceTest {
         taskService.save(foundTask);
 
         //Fetch AnotherTask from DB
-        TaskEntity anotherTask = taskService.findById(uuid);
+        TaskEntity anotherTask = taskService.findById(id);
         assertEquals("Another Task", anotherTask.getDescription());
 
         //Remove task from DB
         taskService.delete(anotherTask);
-        TaskEntity deletedTask = taskService.findById(uuid);
+        TaskEntity deletedTask = taskService.findById(id);
         assertNull(deletedTask);
     }
 }

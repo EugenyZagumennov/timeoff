@@ -2,13 +2,10 @@ package ez.timeoff.core.entities;
 
 import ez.timeoff.core.entities.enums.TaskStatus;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
 * Entity class for table 'Tasks'
@@ -27,13 +24,13 @@ import java.util.UUID;
 )
 @Entity
 @Table(schema = "timeoff", name = "task")
+@SequenceGenerator(name = "tasks_seq", sequenceName = "tasks_seq", initialValue = 1, allocationSize = 1)
 public class TaskEntity {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)", length = 16 )
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tasks_seq")
+    @Column(updatable = false, nullable = false)
+    private Long id;
 
     @NotNull
     @Column(name = "string_id", nullable = false)

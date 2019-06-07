@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 import java.time.Instant;
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * DepartmentEntity service class
@@ -28,8 +26,8 @@ public class DepartmentService {
         return departmentRepository.save(department);
     }
 
-    public DepartmentEntity findById(UUID uuid){
-        return departmentRepository.findById(uuid).orElse(null);
+    public DepartmentEntity findById(Long id){
+        return departmentRepository.findById(id).orElse(null);
     }
 
     public List<DepartmentEntity> findAll(){

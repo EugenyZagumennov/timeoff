@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * TimerecordEntity service class
@@ -25,8 +24,8 @@ public class TimerecordService {
         return timerecordRepository.save(timerecord);
     }
 
-    public TimerecordEntity findById(UUID uuid){
-        return timerecordRepository.findById(uuid).orElse(null);
+    public TimerecordEntity findById(Long id){
+        return timerecordRepository.findById(id).orElse(null);
     }
 
     public List<TimerecordEntity> findAll(){

@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Entity class for table 'DepartmentEntity'
@@ -29,13 +28,13 @@ import java.util.UUID;
         )
 )
 @Table(schema = "timeoff", name = "department")
+@SequenceGenerator(name = "departments_seq", sequenceName = "departments_seq", initialValue = 1, allocationSize = 1)
 public class DepartmentEntity {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)", length = 16 )
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "departments_seq")
+    @Column(updatable = false, nullable = false)
+    private Long id;
 
     @NotNull
     @Size(max = 200)

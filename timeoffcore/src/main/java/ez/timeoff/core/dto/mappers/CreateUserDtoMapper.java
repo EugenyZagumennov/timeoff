@@ -9,8 +9,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.UUID;
-
 @Mapper(componentModel = "spring")
 public abstract class CreateUserDtoMapper {
 
@@ -23,6 +21,6 @@ public abstract class CreateUserDtoMapper {
     public abstract UserEntity map(CreateUserDto dto);
 
     protected DepartmentEntity getDepartment(CreateUserDto dto){
-        return departmentService.findById(UUID.fromString(dto.getDepartmentUuid()));
+        return departmentService.findById(Long.parseLong(dto.getDepartmentId()));
     }
 }

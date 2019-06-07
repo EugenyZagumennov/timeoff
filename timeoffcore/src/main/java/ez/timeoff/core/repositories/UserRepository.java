@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Jpa Repository for User entities
@@ -13,7 +12,7 @@ import java.util.UUID;
  * @author Evgeniy Zagumennov
  */
 @Repository
-public interface UserRepository extends JpaRepository<UserEntity, UUID> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     List<UserEntity> findAllByFirstNameContaining(String name);
 

@@ -19,5 +19,5 @@ public class CreateUserDto {
     private String password;
 
     @NotEmpty
-    private String departmentUuid;
+    private String departmentId;
 }

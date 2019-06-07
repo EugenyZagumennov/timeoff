@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Jpa Repository for Department entities
@@ -13,7 +12,7 @@ import java.util.UUID;
  * @author Evgeniy Zagumennov
  */
 @Repository
-public interface DepartmentRepository extends JpaRepository<DepartmentEntity, UUID> {
+public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Long> {
 
     List<DepartmentEntity> findByNameContaining(String name);
 }

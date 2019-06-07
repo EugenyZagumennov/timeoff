@@ -1,11 +1,8 @@
 package ez.timeoff.core.entities;
 
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
 /**
  * Entity class for table 'TimerecordEntity'
@@ -18,13 +15,13 @@ import java.util.UUID;
 @EqualsAndHashCode
 @Entity
 @Table(schema = "timeoff", name = "timerecord")
+@SequenceGenerator(name = "timerecords_seq", sequenceName = "timerecords_seq", initialValue = 1, allocationSize = 1)
 public class TimerecordEntity {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)", length = 16 )
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "timerecords_seq")
+    @Column(updatable = false, nullable = false)
+    private Long id;
 
     @NotNull
     @Column(name = "timestamp", nullable = false)
@@ -52,7 +49,7 @@ public class TimerecordEntity {
     @Override
     public String toString() {
         return "TimerecordEntity{" +
-                "uuid=" + uuid +
+                "id=" + id +
                 ", timestamp=" + timestamp +
                 ", hours=" + hours +
                 ", task=" + task +

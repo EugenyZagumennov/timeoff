@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * UserEntity service class
@@ -33,8 +32,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public UserEntity findById(UUID uuid){
-        return userRepository.findById(uuid).orElse(null);
+    public UserEntity findById(Long id){
+        return userRepository.findById(id).orElse(null);
     }
 
     public List<UserEntity> findByFirstNameLike(String name){

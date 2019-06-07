@@ -3,15 +3,12 @@ package ez.timeoff.core.entities;
 import ez.timeoff.core.entities.enums.UserRole;
 import ez.timeoff.core.entities.enums.UserStatus;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.time.Instant;
 
 /**
@@ -32,13 +29,13 @@ import java.time.Instant;
 )
 @Entity
 @Table(schema = "timeoff", name = "user")
+@SequenceGenerator(name = "users_seq", sequenceName = "users_seq", initialValue = 1, allocationSize = 1)
 public class UserEntity {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)", length = 16 )
-    private UUID uuid;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @Column(updatable = false, nullable = false)
+    private Long id;
 
     @NotNull
     @Size(max = 100)
