@@ -12,6 +12,12 @@
 
         <form method="post" action="/departments">
             <input type="text" name="name" placeholder="Название" /><br>
+            <select name="parentId">
+              <option value="" selected>Выберите родительский департамент</option>
+              {{#departments}}
+                <option value="{{id}}">{{name}}</option>
+              {{/departments}}
+            </select><br>
             <input type="hidden" name="_csrf" value="{{_csrf.token}}">
             <button type="submit">Добавить</button>
         </form><br>

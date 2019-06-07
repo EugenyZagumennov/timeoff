@@ -26,7 +26,7 @@ public class UserService {
     private DepartmentService departmentService;
 
     @Autowired
-    CreateUserDtoMapper mapper;
+    private CreateUserDtoMapper mapper;
 
     public UserEntity save(UserEntity user){
         return userRepository.save(user);

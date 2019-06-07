@@ -4,6 +4,10 @@ import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 
+/**
+ *
+ * @author Evgeniy Zagumennov
+ */
 @Data
 public class CreateUserDto {
     @NotEmpty

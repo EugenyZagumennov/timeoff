@@ -45,6 +45,10 @@ public class DepartmentEntity {
     @Column(name = "createdDate", nullable = false)
     private Instant createdDate;
 
+    @ManyToOne
+    @JoinColumn(name = "parent_department_fk")
+    private DepartmentEntity parentDepartment;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     List<UserEntity> users = new ArrayList<>();
 

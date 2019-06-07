@@ -11,7 +11,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
