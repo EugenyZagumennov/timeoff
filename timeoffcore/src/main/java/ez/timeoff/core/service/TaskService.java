@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Evgeniy Zagumennov
  */
-@Service("taskService")
+@Service
 @Transactional
 public class TaskService {
 

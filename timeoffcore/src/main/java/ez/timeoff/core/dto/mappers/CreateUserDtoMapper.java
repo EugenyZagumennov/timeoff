@@ -21,6 +21,6 @@ public abstract class CreateUserDtoMapper {
     public abstract UserEntity map(CreateUserDto dto);
 
     protected DepartmentEntity getDepartment(CreateUserDto dto){
-        return departmentService.findById(Long.parseLong(dto.getDepartmentId()));
+        return departmentService.findById(dto.getDepartmentId());
     }
 }

@@ -3,6 +3,7 @@ package ez.timeoff.core.dto;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -22,6 +23,6 @@ public class CreateUserDto {
     @NotEmpty
     private String password;
 
-    @NotEmpty
-    private String departmentId;
+    @NotNull
+    private Long departmentId;
 }

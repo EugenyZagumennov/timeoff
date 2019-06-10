@@ -45,7 +45,7 @@ public class DepartmentEntity {
     @Column(name = "createdDate", nullable = false)
     private Instant createdDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_department_fk")
     private DepartmentEntity parentDepartment;
 

@@ -24,6 +24,6 @@ public abstract class CreateDepartmentDtoMapper{
     public abstract DepartmentEntity map(CreateDepartmentDto dto);
 
     protected DepartmentEntity getParentDepartment(CreateDepartmentDto dto){
-        return departmentService.findById(Long.parseLong(dto.getParentId()));
+        return dto.getParentId() != null ? departmentService.findById(dto.getParentId()) : null;
     }
 }

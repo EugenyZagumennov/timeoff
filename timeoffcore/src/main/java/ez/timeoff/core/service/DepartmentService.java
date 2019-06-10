@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author Evgeniy Zagumennov
  */
-@Service("departmentService")
+@Service
 @Transactional
 public class DepartmentService {
 
@@ -49,15 +49,13 @@ public class DepartmentService {
     }
 
     public DepartmentEntity createNewDepartment(CreateDepartmentDto dto){
-        Long parentId = Long.parseLong(dto.getParentId());
-        DepartmentEntity foundDepartment = findById(parentId);
+        if(dto.getParentId() != null) {
+            Long parentId = dto.getParentId();
+            DepartmentEntity foundDepartment = findById(parentId);
 
-        if(foundDepartment == null){
-            throw new ValidationException(String.format("Department with id=%d doesn't exist!", parentId));
-        }else if(foundDepartment.getParentDepartment() != null && parentId == foundDepartment.getParentDepartment().getId()){
-            throw new ValidationException(
-                    String.format("Department with id=%d cannot be the parent of department=%d!",
-                            parentId, foundDepartment.getParentDepartment().getId()));
+            if (foundDepartment == null) {
+                throw new ValidationException(String.format("Department with id=%d doesn't exist!", parentId));
+            }
         }
 
         DepartmentEntity departmentEntiry = mapper.map(dto);

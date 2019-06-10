@@ -14,5 +14,5 @@ public class CreateDepartmentDto {
     @NotEmpty
     private String name;
 
-    private String parentId;
+    private Long parentId;
 }

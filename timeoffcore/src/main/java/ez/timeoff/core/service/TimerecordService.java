@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Evgeniy Zagumennov
  */
-@Service("timerecordService")
+@Service
 @Transactional
 public class TimerecordService {
 

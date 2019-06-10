@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author Evgeniy Zagumennov
  */
-@Service("userService")
+@Service
 @Transactional
 public class UserService {
 
