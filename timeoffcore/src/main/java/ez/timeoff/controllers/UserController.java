@@ -24,11 +24,20 @@ public class UserController {
     private DepartmentService departmentService;
 
     @GetMapping
-    public String getAllUsers(Map<String, Object> model) {
-        List<UserEntity> users = userService.findAll();
+    public String getUsers(@RequestParam(required = false, defaultValue = "") String filter, Map<String, Object> model) {
+        List<UserEntity> users;
+
+        if(filter.isEmpty()){
+            users = userService.findAll();
+        }else {
+            users = userService.findByFirstNameLike(filter);
+        }
+
         List<DepartmentEntity> deps = departmentService.findAll();
+
         model.put("users", users);
         model.put("departments", deps);
+        model.put("filter", filter);
         return "users";
     }
 
@@ -46,19 +55,6 @@ public class UserController {
         userService.createNewUser(userDto);
         List<UserEntity> users = userService.findAll();
         model.put("users", users);
-        return "users";
-    }
-
-    @PostMapping("/filter")
-    public String filter(@RequestParam String firstname, Map<String, Object> model) {
-        List<UserEntity> users;
-        if(firstname == null || firstname.isEmpty()){
-            users = userService.findAll();
-        }else {
-            users = userService.findByFirstNameLike(firstname);
-        }
-        model.put("users", users);
-
         return "users";
     }
 }

@@ -22,9 +22,8 @@
             <button type="submit">Добавить</button>
         </form><br>
 
-        <form method="post" action="/departments/filter">
-            <input type="text" name="name" placeholder="Название" /><br>
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <form method="get" action="/departments">
+            <input type="text" name="filter" placeholder="Название" value="{{filter}}"/><br>
             <button type="submit">Найти</button>
         </form><br>
 
