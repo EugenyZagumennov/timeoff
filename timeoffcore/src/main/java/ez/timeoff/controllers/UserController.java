@@ -46,6 +46,7 @@ public class UserController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addUser(@Valid CreateUserDto userDto, Map<String, Object> model) {
         List<DepartmentEntity> deps = departmentService.findAll();
         model.put("departments", deps);

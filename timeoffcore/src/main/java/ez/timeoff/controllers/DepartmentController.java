@@ -4,6 +4,7 @@ import ez.timeoff.core.dto.CreateDepartmentDto;
 import ez.timeoff.core.entities.DepartmentEntity;
 import ez.timeoff.core.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,7 @@ public class DepartmentController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addDepartment(@Valid CreateDepartmentDto dto, Map<String, Object> model) {
         departmentService.createNewDepartment(dto);
 
