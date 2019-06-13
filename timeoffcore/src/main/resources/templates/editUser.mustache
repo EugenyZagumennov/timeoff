@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+</head>
+    <body>
+        <form method="post" action="/users/edit/{{user.id}}">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+            <input type="hidden" name="id" value="{{user.id}}" />
+            <label>Логин  <input type="text" name="login" value="{{user.login}}" /></label><br>
+            <label>Имя    <input type="text" name="firstName" value="{{user.firstName}}" /></label><br>
+            <label>Фамилия<input type="text" name="lastName" value="{{user.lastName}}" /></label><br>
+            <label>Пароль <input type="password" name="password" value=""></label><br>
+            <label>Департамент
+                <select name="departmentId">
+                    {{#departments}}
+                        <option value="{{id}}" >{{name}}</option>
+                    {{/departments}}
+                </select></label><br>
+            <label>Роль
+                <select name="role">
+                    {{#roles}}
+                        <option value="{{name}}" >{{name}}</option>
+                    {{/roles}}
+                </select></label><br>
+            <label>Роль
+                <select name="status">
+                    {{#statuses}}
+                      <option value="{{name}}" >{{name}}</option>
+                    {{/statuses}}
+                </select></label><br>
+            <button type="submit">Сохранить</button>
+        </form><br>
+        <a href="/users">Назад</a>
+    </body>
+</html>

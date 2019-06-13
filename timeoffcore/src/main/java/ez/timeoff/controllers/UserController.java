@@ -1,11 +1,15 @@
 package ez.timeoff.controllers;
 
 import ez.timeoff.core.dto.CreateUserDto;
+import ez.timeoff.core.dto.UpdateUserDto;
 import ez.timeoff.core.entities.DepartmentEntity;
 import ez.timeoff.core.entities.UserEntity;
+import ez.timeoff.core.entities.enums.UserRole;
+import ez.timeoff.core.entities.enums.UserStatus;
 import ez.timeoff.core.service.DepartmentService;
 import ez.timeoff.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,5 +60,23 @@ public class UserController {
         List<UserEntity> users = userService.findAll();
         model.put("users", users);
         return "users";
+    }
+
+    @GetMapping("{user}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String editUserForm(@PathVariable UserEntity user, Map<String, Object> model){
+        List<DepartmentEntity> deps = departmentService.findAll();
+        model.put("departments", deps);
+        model.put("user", user);
+        model.put("roles", UserRole.values());
+        model.put("statuses", UserStatus.values());
+        return "editUser";
+    }
+
+    @PostMapping("edit/{user}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String editUser(@Valid UpdateUserDto dto, Map<String, Object> model){
+        userService.updateUser(dto);
+        return "redirect:/users";
     }
 }
