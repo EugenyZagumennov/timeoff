@@ -26,6 +26,8 @@
         <tr>
             <td>${d.name}</td>
         </tr>
+        <#else>
+            No departments available
         </#list>
     </table>
 </@common.common>

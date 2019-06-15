@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -20,7 +21,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-
     @Autowired
     private UserService userService;
 
@@ -47,19 +47,19 @@ public class UserController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String addUser(@Valid CreateUserDto userDto, Map<String, Object> model) {
-        List<DepartmentEntity> deps = departmentService.findAll();
-        model.put("departments", deps);
-
+    public String addUser(@RequestParam("file") MultipartFile file,
+                          @Valid CreateUserDto userDto,
+                          Map<String, Object> model)
+    {
         UserEntity foundUser = userService.findByLogin(userDto.getLogin());
         if(foundUser != null){
             model.put("message", "User exists!");
             return "users";
         }
 
-        userService.createNewUser(userDto);
-        List<UserEntity> users = userService.findAll();
-        model.put("users", users);
+        userService.createNewUser(userDto, file);
+        model.put("departments", departmentService.findAll());
+        model.put("users", userService.findAll());
         return "users";
     }
 
@@ -76,8 +76,11 @@ public class UserController {
 
     @PostMapping("edit/{user}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String editUser(@Valid UpdateUserDto dto, Map<String, Object> model){
-        userService.updateUser(dto);
+    public String editUser(@RequestParam("file") MultipartFile file,
+                           @Valid UpdateUserDto dto,
+                           Map<String, Object> model)
+    {
+        userService.updateUser(dto, file);
         return "redirect:/users";
     }
 }

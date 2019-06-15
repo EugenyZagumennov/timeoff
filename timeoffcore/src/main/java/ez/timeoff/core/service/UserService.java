@@ -6,8 +6,11 @@ import ez.timeoff.core.dto.mappers.CreateUserDtoMapper;
 import ez.timeoff.core.dto.mappers.UpdateUserDtoMapper;
 import ez.timeoff.core.repositories.UserRepository;
 import ez.timeoff.core.entities.UserEntity;
+import ez.timeoff.core.service.storage.FileStorageService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -33,6 +36,9 @@ public class UserService {
     @Autowired
     private UpdateUserDtoMapper updateMapper;
 
+    @Autowired
+    private FileStorageService fileStorageService;
+
     public UserEntity save(UserEntity user){
         return userRepository.save(user);
     }
@@ -57,14 +63,20 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public UserEntity createNewUser(CreateUserDto dto){
+    public UserEntity createNewUser(CreateUserDto dto, MultipartFile file){
+        fileStorageService.store(file,dto.getLogin());
+
         UserEntity userEntity = createMapper.map(dto);
         save(userEntity);
 
         return userEntity;
     }
 
-    public UserEntity updateUser(UpdateUserDto dto){
+    public UserEntity updateUser(UpdateUserDto dto, MultipartFile file){
+        if(!file.isEmpty()){
+            fileStorageService.store(file, dto.getLogin());
+        }
+
         UserEntity user = userRepository.findById(dto.getId())
                 .orElseThrow(() -> new RuntimeException(String.format("No user with id = %d", dto.getId())));
 
