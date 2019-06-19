@@ -30,11 +30,11 @@ public class FileStorageService {
 
     public void store(MultipartFile file, String login){
         try {
-            Path path = rootLocation.resolve(FileUtils.getAvatarPath(login));
-            if(!Files.exists(path)){
+            Path path = rootLocation.resolve(FileUtils.getAvatarDirectory(login));
+            if(!path.toFile().exists()){
                 Files.createDirectories(path);
             }
-            Files.copy(file.getInputStream(), rootLocation.resolve(FileUtils.getAvatarFilePath(login)), REPLACE_EXISTING);
+            Files.copy(file.getInputStream(), rootLocation.resolve(FileUtils.getAvatarFile(login)), REPLACE_EXISTING);
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + file.getOriginalFilename(), e);
         }
@@ -42,7 +42,7 @@ public class FileStorageService {
 
     public Resource loadAsResource(String login) {
         try {
-            Path file = load(FileUtils.getAvatarFilePath(login));
+            Path file = load(FileUtils.getAvatarFile(login));
             Resource resource = new UrlResource(file.toUri());
             if(resource.exists() || resource.isReadable()) {
                 return resource;

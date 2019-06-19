@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import static ez.timeoff.core.service.utils.FileUtils.AVATAR_FILE_NAME;
-
 @Controller
 @RequestMapping("/files")
 public class FileController {
