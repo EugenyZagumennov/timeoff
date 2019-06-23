@@ -27,7 +27,7 @@ public abstract class UpdateUserDtoMapper{
             target.setLastName(src.getLastName());
         }
         if(src.getPassword() != null && !src.getPassword().isEmpty()){
-            target.setPassword(src.getPassword().getBytes());
+            target.setPassword(src.getPassword());
         }
         if(src.getDepartmentId() != null){
             DepartmentEntity dep = departmentService.findById(src.getDepartmentId());

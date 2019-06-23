@@ -16,7 +16,6 @@ public abstract class CreateUserDtoMapper {
     private DepartmentService departmentService;
 
     @Mapping(target = "createdDate", expression = "java(java.time.Instant.now())")
-    @Mapping(target = "password", source = "password.bytes")
     @Mapping(target = "department", expression = "java(getDepartment(dto))")
     public abstract UserEntity map(CreateUserDto dto);
 

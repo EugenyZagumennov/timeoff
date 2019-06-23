@@ -34,7 +34,7 @@ public class UserServiceTest {
 
         //Create test user
         UserEntity user
-                = new UserEntity("login", "FirstName",  "LastName", Instant.now(), "password".getBytes(), null, UserRole.USER);
+                = new UserEntity("login", "FirstName",  "LastName", Instant.now(), "password", null, UserRole.USER);
         Long id = userService.save(user).getId();
         assertNotNull(id);
 
