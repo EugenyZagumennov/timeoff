@@ -34,11 +34,10 @@ import java.time.Instant;
 )
 @Entity
 @Table(schema = "timeoff", name = "user")
-@SequenceGenerator(name = "users_seq", sequenceName = "users_seq", initialValue = 1, allocationSize = 1)
 public class UserEntity implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_seq")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false, nullable = false)
     private Long id;
 
@@ -107,7 +106,11 @@ public class UserEntity implements UserDetails {
     }
 
     public boolean isAdmin(){
-        return role == UserRole.USER || role == UserRole.SUPERADMIN;
+        return role == UserRole.ADMIN || role == UserRole.SUPERADMIN;
+    }
+
+    public boolean isSuperAdmin(){
+        return role == UserRole.SUPERADMIN;
     }
 
     @Override

@@ -9,9 +9,9 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = "ez.timeoff")
 @EnableConfigurationProperties(StorageProperties.class)
-public class Application {
+public class TimeOffApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(TimeOffApplication.class, args);
     }
 }

@@ -28,11 +28,10 @@ import java.util.List;
         )
 )
 @Table(schema = "timeoff", name = "department")
-@SequenceGenerator(name = "departments_seq", sequenceName = "departments_seq", initialValue = 1, allocationSize = 1)
 public class DepartmentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "departments_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false, nullable = false)
     private Long id;
 

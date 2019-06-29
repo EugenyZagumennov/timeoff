@@ -52,14 +52,15 @@ public class UserController {
                           Map<String, Object> model)
     {
         UserEntity foundUser = userService.findByLogin(userDto.getLogin());
-        if(foundUser != null){
-            model.put("message", "User exists!");
-            return "users";
-        }
-
-        userService.createNewUser(userDto, file);
         model.put("departments", departmentService.findAll());
         model.put("users", userService.findAll());
+
+        if(foundUser != null){
+            model.put("message", "User exists!");
+        }else {
+            userService.createNewUser(userDto, file);
+        }
+
         return "users";
     }
 

@@ -1,8 +1,6 @@
 <#import "/parts/common.ftl" as common>
-<#import "/parts/logout.ftl" as logout>
 
 <@common.common>
-    <@logout.logout/>
     <form method="post" enctype="multipart/form-data" action="/users/edit/${user.id}">
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="hidden" name="id" value="${user.id}" />

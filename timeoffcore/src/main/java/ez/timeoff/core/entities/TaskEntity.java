@@ -24,11 +24,10 @@ import java.util.List;
 )
 @Entity
 @Table(schema = "timeoff", name = "task")
-@SequenceGenerator(name = "tasks_seq", sequenceName = "tasks_seq", initialValue = 1, allocationSize = 1)
 public class TaskEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tasks_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(updatable = false, nullable = false)
     private Long id;
 

@@ -1,8 +1,6 @@
 <#import "/parts/common.ftl" as common>
-<#import "/parts/logout.ftl" as logout>
 
 <@common.common>
-<@logout.logout/>
     <form method="post" action="/departments">
         <input type="text" name="name" placeholder="Название" /><br>
         <select name="parentId">

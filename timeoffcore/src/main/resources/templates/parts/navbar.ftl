@@ -1,4 +1,5 @@
 <#include "security.ftl">
+<#import "logout.ftl" as logout>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand">TimeOff</a>
@@ -16,6 +17,7 @@
       </li>
     </ul>
 
-    <div class="navbar-text">${username}</div>
+    <div class="navbar-text mr-2">${username}</div>
+    <@logout.logout/>
   </div>
 </nav>

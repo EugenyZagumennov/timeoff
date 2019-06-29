@@ -15,11 +15,10 @@ import javax.validation.constraints.NotNull;
 @EqualsAndHashCode
 @Entity
 @Table(schema = "timeoff", name = "timerecord")
-@SequenceGenerator(name = "timerecords_seq", sequenceName = "timerecords_seq", initialValue = 1, allocationSize = 1)
 public class TimerecordEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "timerecords_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(updatable = false, nullable = false)
     private Long id;
 
