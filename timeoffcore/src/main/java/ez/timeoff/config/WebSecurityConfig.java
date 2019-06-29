@@ -36,26 +36,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService)
                 .passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
-
-    /*@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .usersByUsernameQuery("select login, password, status='ACTIVE' from user where login=?")
-                .authoritiesByUsernameQuery("select login, role from user where login=?");
-    }*/
-
-    /*@Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("u")
-                        .password("p")
-                        .roles("USER")
-                        .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }*/
 }
