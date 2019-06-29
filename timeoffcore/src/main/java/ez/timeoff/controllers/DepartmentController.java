@@ -45,6 +45,7 @@ public class DepartmentController {
 
         List<DepartmentEntity> deps = departmentService.findAll();
         model.put("departments", deps);
+        model.put("filter", "");
 
         return "departments";
     }

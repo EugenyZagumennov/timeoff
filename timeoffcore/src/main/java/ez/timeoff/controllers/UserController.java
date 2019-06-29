@@ -53,7 +53,6 @@ public class UserController {
     {
         UserEntity foundUser = userService.findByLogin(userDto.getLogin());
         model.put("departments", departmentService.findAll());
-        model.put("users", userService.findAll());
 
         if(foundUser != null){
             model.put("message", "User exists!");
@@ -61,6 +60,7 @@ public class UserController {
             userService.createNewUser(userDto, file);
         }
 
+        model.put("users", userService.findAll());
         return "users";
     }
 
