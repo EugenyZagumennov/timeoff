@@ -2,19 +2,20 @@ package ez.timeoff.core.entities;
 
 import ez.timeoff.core.entities.enums.UserRole;
 import ez.timeoff.core.entities.enums.UserStatus;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.time.Instant;
 
 /**
  * Entity class for table 'UserEntity'

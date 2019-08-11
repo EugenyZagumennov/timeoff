@@ -9,12 +9,16 @@ import ez.timeoff.core.entities.UserEntity;
 import ez.timeoff.core.entities.enums.UserRole;
 import ez.timeoff.core.entities.enums.UserStatus;
 import ez.timeoff.core.service.DepartmentService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Mapper(componentModel = "spring")
 public abstract class UpdateUserDtoMapper{
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UserEntity update(UpdateUserDto src, UserEntity target){
         if(src.getLogin() != null && !src.getLogin().isEmpty()){
@@ -27,7 +31,7 @@ public abstract class UpdateUserDtoMapper{
             target.setLastName(src.getLastName());
         }
         if(src.getPassword() != null && !src.getPassword().isEmpty()){
-            target.setPassword(src.getPassword());
+            target.setPassword(passwordEncoder.encode(src.getPassword()));
         }
         if(src.getDepartmentId() != null){
             DepartmentEntity dep = departmentService.findById(src.getDepartmentId());

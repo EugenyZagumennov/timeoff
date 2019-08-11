@@ -1,2 +1,2 @@
 insert into department (id, created_date, name) values(1, now(), 'TestDepartment');
-insert into user (id, created_date, first_name, last_name, login, password, role, status, department_fk) values(1, now(), 'Admin', 'Admin', 'admin', 'admin', 'ADMIN', 'ACTIVE', 1);
+insert into user (id, created_date, first_name, last_name, login, password, role, status, department_fk) values(1, now(), 'Admin', 'Admin', 'admin', '$2a$10$8/wZ6VS7cCyBQXCnETr5guBEEb5WYGQ28dZbGIhiu7UoTh1B/EcMO', 'ADMIN', 'ACTIVE', 1);
