@@ -2,7 +2,14 @@
 
 <@common.common>
     <form method="post" action="/departments">
-        <input type="text" name="name" placeholder="Название" /><br>
+        <input type="text" class="form-control ${(nameError??)?string('is-invalid', '')}"
+               name="name" placeholder="Название"/>
+        <#if nameError??>
+            <div class="invalid-feedback">
+                ${nameError}
+            </div>
+        </#if>
+        <br>
         <select name="parentId">
           <option value="" selected>Выберите родительский департамент</option>
           <#list departments as d>

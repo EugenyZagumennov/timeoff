@@ -6,6 +6,9 @@ import ez.timeoff.core.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -40,13 +45,29 @@ public class DepartmentController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String addDepartment(@Valid CreateDepartmentDto dto, Map<String, Object> model) {
-        departmentService.createNewDepartment(dto);
+    public String addDepartment(@Valid CreateDepartmentDto dto,
+                                BindingResult bindingResult,
+                                Model model)
+    {
+
+        if(bindingResult.hasErrors()){
+            model.addAllAttributes(getErrors(bindingResult));
+        } else {
+            departmentService.createNewDepartment(dto);
+        }
 
         List<DepartmentEntity> deps = departmentService.findAll();
-        model.put("departments", deps);
-        model.put("filter", "");
+        model.addAttribute("departments", deps);
+        model.addAttribute("filter", "");
 
         return "departments";
+    }
+
+    Map<String, String> getErrors(BindingResult br){
+        Collector<FieldError, ?, Map<String, String>> collector = Collectors.toMap(
+                fieldError -> fieldError.getField() + "Error",
+                FieldError::getDefaultMessage
+        );
+        return br.getFieldErrors().stream().collect(collector);
     }
 }
