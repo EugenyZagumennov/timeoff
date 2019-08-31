@@ -2,6 +2,7 @@ package ez.timeoff.core.dto;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -11,18 +12,18 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class CreateUserDto {
-    @NotEmpty
+    @NotBlank(message = "Введите логин!")
     private String login;
 
-    @NotEmpty
+    @NotBlank(message = "Введите имя!")
     private String firstName;
 
-    @NotEmpty
+    @NotBlank(message = "Введите фамилию!")
     private String lastName;
 
-    @NotEmpty
+    @NotBlank(message = "Введите логин!")
     private String password;
 
-    @NotNull
+    @NotNull(message = "Выберите департамент!")
     private Long departmentId;
 }

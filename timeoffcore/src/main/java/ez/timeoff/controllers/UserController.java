@@ -8,9 +8,12 @@ import ez.timeoff.core.entities.enums.UserRole;
 import ez.timeoff.core.entities.enums.UserStatus;
 import ez.timeoff.core.service.DepartmentService;
 import ez.timeoff.core.service.UserService;
+import ez.timeoff.core.service.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,6 +29,9 @@ public class UserController {
 
     @Autowired
     private DepartmentService departmentService;
+
+    @Autowired
+    private ValidationService validationService;
 
     @GetMapping
     public String getUsers(@RequestParam(required = false, defaultValue = "") String filter, Map<String, Object> model) {
@@ -49,18 +55,24 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String addUser(@RequestParam("file") MultipartFile file,
                           @Valid CreateUserDto userDto,
-                          Map<String, Object> model)
+                          BindingResult bindingResult,
+                          Model model)
     {
-        UserEntity foundUser = userService.findByLogin(userDto.getLogin());
-        model.put("departments", departmentService.findAll());
+        model.addAttribute("departments", departmentService.findAll());
+        model.addAttribute("users", userService.findAll());
 
+        if(bindingResult.hasErrors()){
+            model.addAllAttributes(validationService.getErrors(bindingResult));
+            return "users";
+        }
+
+        UserEntity foundUser = userService.findByLogin(userDto.getLogin());
         if(foundUser != null){
-            model.put("message", "User exists!");
+            model.addAttribute("message", "Пользователь с таким логином уже существует!");
         }else {
             userService.createNewUser(userDto, file);
         }
 
-        model.put("users", userService.findAll());
         return "users";
     }
 

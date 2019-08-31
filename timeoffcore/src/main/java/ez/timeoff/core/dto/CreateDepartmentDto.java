@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 public class CreateDepartmentDto {
-    @NotEmpty
+    @NotEmpty(message = "Введите имя департамента!")
     private String name;
 
     private Long parentId;

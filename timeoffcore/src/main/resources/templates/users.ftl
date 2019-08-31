@@ -29,20 +29,56 @@
         Создать нового пользователя
     </button>
     <#if message??>${message}<br></#if>
-    <div class="collapse" id="createUser">
+    <div class="collapse <#if message??>show</#if>" id="createUser">
         <div class="card card-body">
             <form method="post" enctype="multipart/form-data" action="/users">
-                <input type="text" name="login" placeholder="Логин" /><br>
-                <input type="text" name="firstName" placeholder="Имя" /><br>
-                <input type="text" name="lastName" placeholder="Фамилия" /><br>
-                <input type="password" name="password" placeholder="Пароль"><br>
-                <input type="file" name="file" accept="image/jpeg,image/png"/><br>
+                <input type="text" name="login" placeholder="Логин" class="form-control ${(loginError??)?string('is-invalid', '')}"/>
+                <#if loginError??>
+                    <div class="invalid-feedback">
+                        ${loginError}
+                    </div>
+                </#if>
+                <br>
+                <input type="text" name="firstName" placeholder="Имя" class="form-control ${(firstNameError??)?string('is-invalid', '')}"/>
+                <#if firstNameError??>
+                    <div class="invalid-feedback">
+                        ${firstNameError}
+                    </div>
+                </#if>
+                <br>
+                <input type="text" name="lastName" placeholder="Фамилия" class="form-control ${(lastNameError??)?string('is-invalid', '')}"/>
+                <#if lastNameError??>
+                    <div class="invalid-feedback">
+                        ${lastNameError}
+                    </div>
+                </#if>
+                <br>
+                <input type="password" name="password" placeholder="Пароль" class="form-control ${(passwordError??)?string('is-invalid', '')}">
+                <#if passwordError??>
+                    <div class="invalid-feedback">
+                        ${passwordError}
+                    </div>
+                </#if>
+                <br>
+                <input type="file" name="file" accept="image/jpeg,image/png" class="form-control ${(fileError??)?string('is-invalid', '')}"/>
+                <#if fileError??>
+                    <div class="invalid-feedback">
+                        ${fileError}
+                    </div>
+                </#if>
+                <br>
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
-                <select name="departmentId">
+                <select name="departmentId" class="form-control ${(departmentIdError??)?string('is-invalid', '')}">
                     <#list departments as d>
                     <option value="${d.id}">${d.name}</option>
                     </#list>
-                </select><br>
+                </select>
+                <#if departmentIdError??>
+                    <div class="invalid-feedback">
+                        ${departmentIdError}
+                    </div>
+                </#if>
+                <br>
                 <button type="submit">Добавить</button>
             </form>
         </div>
