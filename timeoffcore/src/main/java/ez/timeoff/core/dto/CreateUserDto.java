@@ -21,7 +21,7 @@ public class CreateUserDto {
     @NotBlank(message = "Введите фамилию!")
     private String lastName;
 
-    @NotBlank(message = "Введите логин!")
+    @NotBlank(message = "Введите пароль!")
     private String password;
 
     @NotNull(message = "Выберите департамент!")
