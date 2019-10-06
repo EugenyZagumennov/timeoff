@@ -1,4 +1,5 @@
 <#import "/parts/common.ftl" as c>
+<#import "/spring.ftl" as spring/>
 
 <@c.common>
 <#if Session?? && Session.SPRING_SECURITY_LAST_EXCEPTION??>
@@ -8,9 +9,9 @@
 </#if>
 <form method="post" action="/login">
     <div class="form-group row">
-        <label class="col-sm-1 col-form-label">Логин</label>
+        <label class="col-sm-1 col-form-label"><@spring.message "loginpage.login"/></label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" name="username" id="username" placeholder="Логин" />
+            <input type="text" class="form-control" name="username" id="username" placeholder="<@spring.message "loginpage.login"/>" />
         </div>
     </div>
     <div class="form-group row">
