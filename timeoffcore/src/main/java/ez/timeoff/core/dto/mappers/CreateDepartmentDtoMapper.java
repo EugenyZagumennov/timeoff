@@ -1,12 +1,11 @@
 package ez.timeoff.core.dto.mappers;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import ez.timeoff.core.dto.CreateDepartmentDto;
 import ez.timeoff.core.entities.DepartmentEntity;
 import ez.timeoff.core.service.DepartmentService;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created on 07-Jun-19.

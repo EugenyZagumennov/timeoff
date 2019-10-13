@@ -1,8 +1,8 @@
 package ez.timeoff.core.dto;
 
-import javax.validation.constraints.NotEmpty;
-
 import lombok.Data;
+
+import javax.validation.constraints.NotEmpty;
 
 /**
  * Created on 07-Jun-19.

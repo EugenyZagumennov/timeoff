@@ -1,9 +1,8 @@
 package ez.timeoff.core.dto;
 
-import javax.validation.constraints.NotNull;
-
-import ez.timeoff.core.entities.enums.UserRole;
 import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 /**
  *
  * @author Evgeniy Zagumennov

@@ -4,10 +4,9 @@ import ez.timeoff.core.dto.CreateUserDto;
 import ez.timeoff.core.dto.UpdateUserDto;
 import ez.timeoff.core.dto.mappers.CreateUserDtoMapper;
 import ez.timeoff.core.dto.mappers.UpdateUserDtoMapper;
-import ez.timeoff.core.repositories.UserRepository;
 import ez.timeoff.core.entities.UserEntity;
+import ez.timeoff.core.repositories.UserRepository;
 import ez.timeoff.core.service.storage.FileStorageService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

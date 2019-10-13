@@ -1,7 +1,6 @@
 package ez.timeoff.controllers;
 
 import ez.timeoff.core.service.storage.FileStorageService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;

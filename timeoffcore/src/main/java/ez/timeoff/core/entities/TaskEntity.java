@@ -1,7 +1,11 @@
 package ez.timeoff.core.entities;
 
 import ez.timeoff.core.entities.enums.TaskStatus;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

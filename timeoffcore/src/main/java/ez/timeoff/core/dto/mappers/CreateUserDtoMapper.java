@@ -4,7 +4,6 @@ import ez.timeoff.core.dto.CreateUserDto;
 import ez.timeoff.core.entities.DepartmentEntity;
 import ez.timeoff.core.entities.UserEntity;
 import ez.timeoff.core.service.DepartmentService;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;

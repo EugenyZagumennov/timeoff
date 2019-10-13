@@ -1,14 +1,13 @@
 package ez.timeoff.core.dto.mappers;
 
-import org.mapstruct.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import ez.timeoff.core.dto.UpdateUserDto;
 import ez.timeoff.core.entities.DepartmentEntity;
 import ez.timeoff.core.entities.UserEntity;
 import ez.timeoff.core.entities.enums.UserRole;
 import ez.timeoff.core.entities.enums.UserStatus;
 import ez.timeoff.core.service.DepartmentService;
+import org.mapstruct.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Mapper(componentModel = "spring")

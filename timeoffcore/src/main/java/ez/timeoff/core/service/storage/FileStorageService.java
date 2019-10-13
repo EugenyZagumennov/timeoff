@@ -3,7 +3,6 @@ package ez.timeoff.core.service.storage;
 import ez.timeoff.core.service.storage.exceptions.StorageException;
 import ez.timeoff.core.service.storage.exceptions.StorageFileNotFoundException;
 import ez.timeoff.core.service.utils.FileUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
