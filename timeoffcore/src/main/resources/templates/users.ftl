@@ -1,13 +1,14 @@
 <#import "/parts/common.ftl" as common>
+<#import "/spring.ftl" as spring/>
 <#include "/parts/security.ftl">
 
 <@common.common>
     <form method="get" action="/users">
         <input type="text" name="filter" placeholder="Имя" value="${filter?ifExists}"/><br>
-        <button type="submit">Найти</button>
+        <button type="submit"><@spring.message "users.find"/></button>
     </form><br>
 
-    <div>Список пользователей:</div>
+    <div><@spring.message "users.userList"/></div>
     <table>
         <#list users as u>
         <tr>
@@ -21,39 +22,39 @@
             <td><a href="/users/${u.id}">Edit</a></td>
         </tr>
         <#else>
-            No users available
+            <@spring.message "users.noUsers"/>
         </#list>
     </table>
 
     <button ${isAdmin?then("", "disabled")} class="btn btn-primary my-2" type="button" data-toggle="collapse" data-target="#createUser" aria-expanded="false" aria-controls="createUser">
-        Создать нового пользователя
+        <@spring.message "users.createUser"/>
     </button>
     <#if message??>${message}<br></#if>
     <div class="collapse <#if message??>show</#if>" id="createUser">
         <div class="card card-body">
             <form method="post" enctype="multipart/form-data" action="/users">
-                <input type="text" name="login" placeholder="Логин" class="form-control ${(loginError??)?string('is-invalid', '')}"/>
+                <input type="text" name="login" placeholder="<@spring.message "users.login"/>" class="form-control ${(loginError??)?string('is-invalid', '')}"/>
                 <#if loginError??>
                     <div class="invalid-feedback">
                         ${loginError}
                     </div>
                 </#if>
                 <br>
-                <input type="text" name="firstName" placeholder="Имя" class="form-control ${(firstNameError??)?string('is-invalid', '')}"/>
+                <input type="text" name="firstName" placeholder="<@spring.message "users.firstname"/>" class="form-control ${(firstNameError??)?string('is-invalid', '')}"/>
                 <#if firstNameError??>
                     <div class="invalid-feedback">
                         ${firstNameError}
                     </div>
                 </#if>
                 <br>
-                <input type="text" name="lastName" placeholder="Фамилия" class="form-control ${(lastNameError??)?string('is-invalid', '')}"/>
+                <input type="text" name="lastName" placeholder="<@spring.message "users.lastname"/>" class="form-control ${(lastNameError??)?string('is-invalid', '')}"/>
                 <#if lastNameError??>
                     <div class="invalid-feedback">
                         ${lastNameError}
                     </div>
                 </#if>
                 <br>
-                <input type="password" name="password" placeholder="Пароль" class="form-control ${(passwordError??)?string('is-invalid', '')}">
+                <input type="password" name="password" placeholder="<@spring.message "users.password"/>" class="form-control ${(passwordError??)?string('is-invalid', '')}">
                 <#if passwordError??>
                     <div class="invalid-feedback">
                         ${passwordError}
@@ -79,7 +80,7 @@
                     </div>
                 </#if>
                 <br>
-                <button type="submit">Добавить</button>
+                <button type="submit"><@spring.message "users.add"/></button>
             </form>
         </div>
     </div>

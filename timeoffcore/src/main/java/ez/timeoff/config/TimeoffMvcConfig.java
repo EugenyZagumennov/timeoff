@@ -9,6 +9,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+import java.util.Locale;
+
 @Configuration
 public class TimeoffMvcConfig implements WebMvcConfigurer {
 
@@ -32,7 +34,8 @@ public class TimeoffMvcConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
-        //sessionLocaleResolver.setDefaultLocale();
+        sessionLocaleResolver.setDefaultLocale(Locale.forLanguageTag("ru"));
+        //sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);
         return sessionLocaleResolver;
     }
 }

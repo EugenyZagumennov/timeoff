@@ -15,15 +15,15 @@
         </div>
     </div>
     <div class="form-group row">
-        <label class="col-sm-1 col-form-label">Пароль</label>
+        <label class="col-sm-1 col-form-label"><@spring.message "loginpage.password"/></label>
         <div class="col-sm-4">
-            <input type="password" class="form-control" name="password" id="password" placeholder="Пароль" />
+            <input type="password" class="form-control" name="password" id="password" placeholder="<@spring.message "loginpage.password"/>" />
         </div>
     </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}">
     <div class="form-group row">
         <div class="col-sm-10">
-          <button type="submit" class="btn btn-primary">Войти</button>
+          <button type="submit" class="btn btn-primary"><@spring.message "loginpage.enter"/></button>
         </div>
     </div>
 </form>
